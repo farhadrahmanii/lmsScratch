@@ -1,5 +1,5 @@
-@extends('admin.adminDashboard')
-@section('admin')
+@extends('instructor.instructorDashboard')
+@section('instructor')
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 <div class="page-content">
@@ -38,14 +38,14 @@
                     <div class="card">
                         <div class="card-body">
                             <div class="text-center d-flex flex-column align-items-center">
-                                <img src="{{!empty($admin->photo)
-    ? url('upload/admin_images/' . $admin->photo)
+                                <img src="{{!empty($instructor->photo)
+    ? url('upload/instructor_images/' . $instructor->photo)
     : url('upload/default.png')
                                  }}" alt="Admin" class="p-1 rounded-circle bg-primary" width="110">
                                 <div class="mt-3">
-                                    <h4>{{$admin->name}}</h4>
-                                    <p class="mb-1 text-secondary">{{$admin->username}}</p>
-                                    <p class="text-muted font-size-sm">{{$admin->email}}</p>
+                                    <h4>{{$instructor->name}}</h4>
+                                    <p class="mb-1 text-secondary">{{$instructor->username}}</p>
+                                    <p class="text-muted font-size-sm">{{$instructor->email}}</p>
                                     <button class="btn btn-primary">Follow</button>
                                     <button class="btn btn-outline-primary">Message</button>
                                 </div>
@@ -72,14 +72,14 @@
                 <div class="col-lg-8">
                     <div class="card">
                         <div class="card-body">
-                            <form method="POST" action="{{route('admin.profile.store')}}" enctype="multipart/form-data">
+                            <form method="POST" action="{{route('instructor.profile.store')}}" enctype="multipart/form-data">
                                 @csrf
                                 <div class="mb-3 row">
                                     <!-- <div class="col-sm-3">
                                         <h6 class="mb-0">Full Name</h6>
                                     </div> -->
                                     <div class="col-sm-12 text-secondary">
-                                        <x-forms.input name="name" value="{{$admin->name}}" label="Name" />
+                                        <x-forms.input name="name" value="{{$instructor->name}}" label="Name" />
                                     </div>
                                 </div>
                                 <div class="mb-3 row">
@@ -88,7 +88,7 @@
                                     </div> -->
                                     <div class="col-sm-12 text-secondary">
                                         <x-forms.input name="username" label="Name" name="username"
-                                            value="{{$admin->username}}" />
+                                            value="{{$instructor->username}}" />
                                     </div>
                                 </div>
                                 <div class="mb-3 row">
@@ -97,7 +97,7 @@
                                     </div> -->
                                     <div class="col-sm-12 text-secondary">
                                         <x-forms.input type="email" label="email" name="email"
-                                            value="{{$admin->email}}" />
+                                            value="{{$instructor->email}}" />
                                     </div>
                                 </div>
                                 <div class="mb-3 row">
@@ -106,7 +106,7 @@
                                     </div> -->
                                     <div class="col-sm-12 text-secondary">
                                         <x-forms.input type="text" label="phone" class="form-control" name="phone"
-                                            value="{{$admin->phone}}" />
+                                            value="{{$instructor->phone}}" />
                                     </div>
                                 </div>
 
@@ -116,7 +116,7 @@
                                     </div> -->
                                     <div class="col-sm-12 text-secondary">
                                         <x-forms.input type="text" label="Address" class="form-control" name="address"
-                                            value="{{$admin->address}}" />
+                                            value="{{$instructor->address}}" />
                                     </div>
                                 </div>
 
@@ -134,8 +134,8 @@
                                         <h6 class="mb-0"></h6>
                                     </div> -->
                                     <div class="col-sm-12 text-secondary">
-                                        <img src="{{!empty($admin->photo)
-    ? url('upload/admin_images/' . $admin->photo)
+                                        <img src="{{!empty($instructor->photo)
+    ? url('upload/instructor_images/' . $instructor->photo)
     : url('upload/default.png')
                                  }}" alt="Admin" id="showImage" class="rounded-circle" width="110">
                                     </div>

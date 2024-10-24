@@ -26,7 +26,7 @@
     <link rel="stylesheet" href="{{ asset('backend/assets/css/dark-theme.css') }}" />
     <link rel="stylesheet" href="{{ asset('backend/assets/css/semi-dark.css') }}" />
     <link rel="stylesheet" href="{{ asset('backend/assets/css/header-colors.css') }}" />
-    <title>Rocker - Bootstrap 5 Admin Dashboard Template</title>
+    <title>Instructor Dashboard</title>
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css">
     @vite('resources/css/app.css')
 
@@ -36,14 +36,14 @@
     <!--wrapper-->
     <div class="wrapper">
         <!--sidebar wrapper -->
-        @include('admin.body.sidebar')
+        @include('instructor.body.sidebar')
         <!--end sidebar wrapper -->
         <!--start header -->
-        @include('admin.body.header')
+        @include('instructor.body.header')
         <!--end header -->
         <!--start page wrapper -->
         <div class="page-wrapper">
-            @yield('admin')
+            @yield('instructor')
         </div>
         <!--end page wrapper -->
         <!--start overlay-->
@@ -53,7 +53,7 @@
         <a href="javaScript:;" class="back-to-top"><i class='bx bxs-up-arrow-alt'></i></a>
         <!--End Back To Top Button-->
         <!-- Footer -->
-        @include('admin.body.footer')
+        @include('instructor.body.footer')
         <!-- End Footer -->
     </div>
     <!--end wrapper-->

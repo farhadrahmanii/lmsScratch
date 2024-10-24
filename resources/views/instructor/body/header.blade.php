@@ -13,7 +13,7 @@
 
             @php
                 $id = Auth::user()->id;
-                $admin = App\models\User::findOrFail($id);
+                $$instructor = App\models\User::findOrFail($id);
             @endphp
             <div class="top-menu ms-auto">
                 <ul class="gap-1 navbar-nav align-items-center">
@@ -371,19 +371,19 @@
             <div class="px-3 user-box dropdown">
                 <a class="gap-3 d-flex align-items-center nav-link dropdown-toggle dropdown-toggle-nocaret" href="#"
                     role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    <img src="{{ !empty($amdin->photo) ? asset('upload/admin_images/' . $admin->photo) : url('upload/default.png')  }}"
+                    <img src="{{ !empty($instructor->photo) ? asset('upload/instructor_images/' . $$instructor->photo) : url('upload/default.png')  }}"
                         class="user-img" alt="user avatar">
                     <div class="user-info">
-                        <p class="mb-0 user-name">{{$admin->name}}</p>
-                        <p class="mb-0 designattion">{{$admin->email}}</p>
+                        <p class="mb-0 user-name">{{$$instructor->name}}</p>
+                        <p class="mb-0 designattion">{{$instructor->email}}</p>
                     </div>
                 </a>
                 <ul class="dropdown-menu dropdown-menu-end">
-                    <li><a class="dropdown-item d-flex align-items-center" href="{{route('admin.profile')}}"><i
+                    <li><a class="dropdown-item d-flex align-items-center" href="{{route('instructor.profile')}}"><i
                                 class="bx bx-user fs-5"></i><span>Profile</span></a>
                     </li>
                     <li><a class="dropdown-item d-flex align-items-center"
-                            href="{{route('admin.profile.ChangePassword')}}"><i class="bx bx-cog fs-5"></i><span>Update
+                            href="{{route('instructor.profile.ChangePassword')}}"><i class="bx bx-cog fs-5"></i><span>Update
                                 Password</span></a>
                     </li>
                     <li><a class="dropdown-item d-flex align-items-center" href="javascript:;"><i
@@ -398,7 +398,7 @@
                     <li>
                         <div class="mb-0 dropdown-divider"></div>
                     </li>
-                    <li><a class="dropdown-item d-flex align-items-center" href="{{url('admin/logout')}}"><i
+                    <li><a class="dropdown-item d-flex align-items-center" href="{{route('instructor.logout')}}"><i
                                 class="bx bx-log-out-circle"></i><span>Logout</span></a>
                     </li>
                 </ul>
