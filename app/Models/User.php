@@ -17,12 +17,19 @@ class User extends Authenticatable
      *
      * @var array<int, string>
      */
-    protected $fillable = [
-        'name',
-        'email',
-        'password',
-    ];
+    protected $guarded = [];
 
+    // Helper method to check role
+
+    // Define available roles
+    const ADMIN = 'admin';
+    const INSTRUCTOR = 'instructor';
+    const USER = 'user';
+
+    public function hasRole($role)
+    {
+        return $this->role === $role;
+    }
     /**
      * The attributes that should be hidden for serialization.
      *
