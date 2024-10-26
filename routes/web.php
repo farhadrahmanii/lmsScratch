@@ -8,24 +8,24 @@ use App\Http\Controllers\instructorController;
 use App\Http\Middleware\instructor;
 use App\Http\Middleware\Role;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+
+
+Route::get('/', [userController::class, 'home'])->name('home');
+
 
 Route::get('/dashboard', function () {
-    return view('dashboard');
+    return view('frontend.dashboard.index');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 
 Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    Route::get('/user/profile', [userController::class, 'UserProfile'])->name('user.profile');
+    Route::post('/user/profile/update', [userController::class, 'UserProfileUpdate'])->name('user.profile.update');
+    Route::get('/user/profile/logout', [userController::class, 'UserLogout'])->name('user.logout');
+
 });
 
 require __DIR__ . '/auth.php';
-
-
 
 
 // Admin Dashboard
@@ -53,9 +53,11 @@ Route::middleware(['auth', 'verified', 'instructor'])->group(function () {
     Route::post('/instructor/profile/store', [instructorController::class, 'Store'])->name('instructor.profile.store');
 
 });
-
 Route::get('/instructor/login', [instructorController::class, 'InstructorLogin'])->name('instructor.login');
 
 
 // user or Student Dashboard
-Route::get('/user/dashboard', [userController::class, 'UserDashboard'])->middleware(['auth', 'verified', 'user'])->name('user');
+Route::middleware(['auth', 'verified', 'user'])->group(function () {
+    Route::get('/dashboard', [userController::class, 'UserDashboard'])->name('user');
+
+});
