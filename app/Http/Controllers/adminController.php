@@ -80,7 +80,7 @@ class adminController extends Controller
     {
         $id = Auth::user()->id;
         $admin = User::findOrFail($id);
-        return view('admin.change_password', ['admin' => $admin]);
+        return view('admin.admin_change_password', ['admin' => $admin]);
     }
 
     public function adminPasswordUpdate(Request $request)

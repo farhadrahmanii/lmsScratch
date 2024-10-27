@@ -9,7 +9,7 @@
     <div class="media media-card align-items-center">
         <div class="rounded-full media-img media--img media-img-md">
             <img class="rounded-full"
-                src="{{!empty($userData->photo) ? asset('frontend/images/user_images' . $userData->photo) : url('upload/default.png')}}"
+                src="{{!empty($userData->photo) ? asset('upload/user_images/' . $userData->photo) : url('upload/default.png')}}"
                 alt="Student thumbnail image">
         </div>
         <div class="media-body">

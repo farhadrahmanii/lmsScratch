@@ -170,7 +170,7 @@
                                                 <div class="shop-cart-btn">
                                                     <div class="avatar-xs">
                                                         <img class="rounded-full img-fluid"
-                                                            src="{{!empty($userData->photo) ? asset('frontend/images/user_images' . $userData->photo) : url('upload/default.png')}}"
+                                                            src="{{!empty($userData->photo) ? asset('upload/user_images/' . $userData->photo) : url('upload/default.png')}}"
                                                             alt="Avatar image">
                                                     </div>
                                                     <span class="dot-status bg-1"></span>
@@ -181,7 +181,7 @@
                                                         <a href="teacher-detail.html"
                                                             class="flex-shrink-0 avatar-sm d-block">
                                                             <img class="rounded-full img-fluid"
-                                                                src="{{!empty($userData->photo) ? asset('frontend/images/user_images' . $userData->photo) : url('upload/default.png')}}"
+                                                                src="{{!empty($userData->photo) ? asset('upload/user_images/' . $userData->photo) : url('upload/default.png')}}"
                                                                 alt="Avatar image">
                                                         </a>
                                                         <div class="ml-2">
@@ -264,7 +264,7 @@
                                                                 </a>
                                                             </li>
                                                             <li>
-                                                                <a href="index.html">
+                                                                <a href="{{route('user.logout')}}">
                                                                     <i class="mr-1 la la-power-off"></i> Logout
                                                                 </a>
                                                             </li>

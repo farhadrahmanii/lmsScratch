@@ -39,11 +39,26 @@
                         </div>
                         <ul
                             class="flex-wrap pl-3 ml-3 generic-list-item d-flex align-items-center fs-14 border-left border-left-gray">
-                            <li class="pr-3 mr-3 d-flex align-items-center border-right border-right-gray"><i
-                                    class="mr-1 la la-sign-in"></i><a href="{{route('login')}}"> Login</a></li>
-                            <li class="d-flex align-items-center"><i class="mr-1 la la-user"></i><a
-                                    href="{{route('register')}}">
-                                    Register</a></li>
+                            @guest
+                                <li class="pr-3 mr-3 d-flex align-items-center border-right border-right-gray"><i
+                                        class="mr-1 la la-sign-in"></i><a href="{{route('login')}}"> Login</a>
+                                </li>
+                                <li class="d-flex align-items-center"><i class="mr-1 la la-user"></i><a
+                                        href="{{route('register')}}">
+                                        Register</a>
+                                </li>
+                            @endguest
+                            @auth
+                                <li class="d-flex align-items-center"><i class="mr-1 la la-dashboard"></i><a
+                                        href="{{route('dashboard')}}">
+                                        Dashboard</a>
+                                </li>
+
+                                <li class="ml-2 d-flex align-items-center"><i class="mr-1 la la-user"></i><a
+                                        href="{{route('user.logout')}}">
+                                        Logout</a>
+                                </li>
+                            @endauth
                         </ul>
                     </div><!-- end header-widget -->
                 </div><!-- end col-lg-6 -->

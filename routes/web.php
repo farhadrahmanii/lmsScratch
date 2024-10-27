@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Backend\CategoryController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\userController;
 use App\Http\Controllers\adminController;
@@ -13,14 +14,14 @@ use App\Http\Middleware\Role;
 Route::get('/', [userController::class, 'home'])->name('home');
 
 
-Route::get('/dashboard', function () {
-    return view('frontend.dashboard.index');
-})->middleware(['auth', 'verified'])->name('dashboard');
-
 
 Route::middleware('auth')->group(function () {
+
+    Route::get('/dashboard', [userController::class, 'UserDashboard'])->name('dashboard');
     Route::get('/user/profile', [userController::class, 'UserProfile'])->name('user.profile');
     Route::post('/user/profile/update', [userController::class, 'UserProfileUpdate'])->name('user.profile.update');
+    Route::get('/user/change/password', [userController::class, 'UserChangePassword'])->name('user.change.password');
+    Route::post('/user/passwordUpdating', [userController::class, 'UserPasswordUpdate'])->name('user.password.update');
     Route::get('/user/profile/logout', [userController::class, 'UserLogout'])->name('user.logout');
 
 });
@@ -36,6 +37,19 @@ Route::middleware(['auth', 'verified', 'admin'])->group(function () {
     Route::post('/admin/profile/store', [adminController::class, 'Store'])->name('admin.profile.store');
     Route::get('/admin/profile/AdminChangePassword', [adminController::class, 'AdminChangePassword'])->name('admin.profile.ChangePassword');
     Route::post('/admin/profile/AdminpasswordUpdate', [adminController::class, 'adminPasswordUpdate'])->name('admin.password.update');
+
+    // category all Routes
+    Route::controller(CategoryController::class)->group(function () {
+        Route::get('/all/category', 'index')->name('all.category');
+        Route::get('/category/create', 'create')->name('add.category');
+        Route::post('/category/store', 'store')->name('store.category');
+        Route::get('/category/edit/{id}', 'edit')->name('edit.category');
+        Route::patch('/category/update/{id}', 'update')->name('update.category');
+        Route::get('/delete/category/{id}', 'destroy')->name('delete.category');
+    });
+
+
+
 });
 
 Route::get('/admin/login', [adminController::class, 'AdminLogin'])->name('admin.login');
@@ -58,6 +72,5 @@ Route::get('/instructor/login', [instructorController::class, 'InstructorLogin']
 
 // user or Student Dashboard
 Route::middleware(['auth', 'verified', 'user'])->group(function () {
-    Route::get('/dashboard', [userController::class, 'UserDashboard'])->name('user');
 
 });
