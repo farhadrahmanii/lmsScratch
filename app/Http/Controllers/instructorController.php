@@ -11,6 +11,7 @@ class instructorController extends Controller
 {
     public function InstructorDashboard()
     {
+
         return view('instructor.index');
     } // End Method
 

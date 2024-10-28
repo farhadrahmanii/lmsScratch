@@ -48,11 +48,23 @@ Route::middleware(['auth', 'verified', 'admin'])->group(function () {
         Route::get('/delete/category/{id}', 'destroy')->name('delete.category');
     });
 
+    // SubCategory all Routes
+    Route::controller(CategoryController::class)->group(function () {
+        Route::get('/all/subcategory', 'AllSubCategory')->name('all.subcategory');
+        Route::get('/subcategory/create', 'CreateSubCategory')->name('add.subcategory');
+        Route::post('/subcategory/store', 'StoreSubCategory')->name('store.subcategory');
+        Route::get('/subcategory/edit/{id}', 'editSubCategory')->name('edit.subcategory');
+        Route::patch('/subcategory/update/{id}', 'updateSubCategory')->name('update.subcategory');
+        Route::get('/delete/subcategory/{id}', 'destroySubCategory')->name('delete.subcategory');
+    });
+
 
 
 });
 
 Route::get('/admin/login', [adminController::class, 'AdminLogin'])->name('admin.login');
+Route::get('/become/instructor', [adminController::class, 'BecomeInstructor'])->name('become.instructor');
+Route::post('/become/register', [adminController::class, 'StoreInstructor'])->name('store.instructor');
 
 
 // Instructor Dashboard

@@ -6,18 +6,18 @@
 <div class="page-content">
     <!--breadcrumb-->
     <div class="mb-3 page-breadcrumb d-none d-sm-flex align-items-center">
-        <div class="breadcrumb-title pe-3">All Categories</div>
+        <div class="breadcrumb-title pe-3">All SubCategory</div>
         <div class="ps-3">
             <nav aria-label="breadcrumb">
                 <ol class="p-0 mb-0 breadcrumb">
                     <li class="breadcrumb-item"><a href="javascript:;"><i class="bx bx-home-alt"></i></a>
                     </li>
-                    <li class="breadcrumb-item active" aria-current="page">Category</li>
+                    <li class="breadcrumb-item active" aria-current="page">SubCategories</li>
                 </ol>
             </nav>
         </div>
         <div class="ms-auto">
-            <a href="{{route('add.category')}}" class="px-5 btn btn-primary">Add Category</a>
+            <a href="{{route('add.subcategory')}}" class="px-5 btn btn-primary">Add subCategory</a>
         </div>
     </div>
     <!--end breadcrumb-->
@@ -29,22 +29,22 @@
                     <thead>
                         <tr>
                             <th>Sl</th>
-                            <th>Category image</th>
                             <th>Category Name</th>
+                            <th>SubCategory Name</th>
                             <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($category as $key => $item)
+                        @foreach ($subcategory as $key => $item)
 
                             <tr>
                                 <td>{{ $key + 1 }}</td>
-                                <td><img src="{{ asset($item->image) }}" class="rounded" alt="" height="100px"
-                                        width="100px" /></td>
-                                <td>{{$item->category_name}}</td>
+
+                                <td>{{$item['category']['category_name']}}</td>
+                                <td>{{$item->subcategory_name}}</td>
                                 <td>
-                                    <a href="{{route('edit.category', $item->id)}}" class="btn btn-info">Edit</a>
-                                    <a href="{{route('delete.category', $item->id)}}" class="btn btn-danger"
+                                    <a href="{{route('edit.subcategory', $item->id)}}" class="btn btn-info">Edit</a>
+                                    <a href="{{route('delete.subcategory', $item->id)}}" class="btn btn-danger"
                                         id="delete">Delete</a>
                                 </td>
                             </tr>

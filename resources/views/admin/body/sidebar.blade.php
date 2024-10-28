@@ -42,6 +42,7 @@
                 <li> <a href="#"><i class='bx bx-radio-circle'></i>Manage Category</a>
                 </li>
                 <li> <a href="{{route('all.category')}}"><i class='bx bx-radio-circle'></i>All Category</a>
+                <li> <a href="{{route('all.subcategory')}}"><i class='bx bx-radio-circle'></i>Sub Category</a>
                 </li>
                 <li> <a href="ecommerce-add-new-products.html"><i class='bx bx-radio-circle'></i>Add New
                         Category</a>

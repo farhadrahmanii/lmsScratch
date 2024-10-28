@@ -6,6 +6,8 @@ use App\Models\Category;
 use Illuminate\Http\Request;
 use Intervention\Image\Laravel\Facades\Image;
 use App\Http\Controllers\Controller;
+use App\Models\SubCategory;
+
 class CategoryController extends Controller
 {
     /**
@@ -130,6 +132,79 @@ class CategoryController extends Controller
 
         $notification = [
             'message' => 'Category Deleted Successfully',
+            'alert-type' => 'success'
+        ];
+        return redirect()->back()->with($notification);
+    }
+    /////////////////////////////////////// Sub Category start here
+    public function AllSubCategory()
+    {
+        $subcategory = SubCategory::latest()->get();
+
+        return view('admin.backend.subcategory.index', ['subcategory' => $subcategory]);
+    }
+
+    public function CreateSubCategory()
+    {
+        $category = Category::latest()->get();
+
+        return view('admin.backend.subcategory.create', ['category' => $category]);
+    }
+
+    public function StoreSubCategory(Request $request)
+    {
+        // $request->validate([
+        //     'category_id' => ['required', 'integer'],
+        //     'subcategory_name' => ['required'],
+        // ]);
+
+        SubCategory::insert([
+            'category_id' => $request->category_id,
+            'subcategory_name' => $request->subcategory_name,
+            'subcategory_slug' => strtolower(str_replace(' ', '_', $request->subcategory_name)),
+        ]);
+
+        $notification = [
+            'message' => 'SubCategory Added Successfully',
+            'alert-type' => 'success'
+        ];
+        return redirect()->route('all.subcategory')->with($notification);
+    }
+    public function editSubCategory($id)
+    {
+        $category = Category::latest()->get();
+        $subcategory = SubCategory::findOrFail($id);
+
+        return view('admin.backend.subcategory.edit', ['category' => $category, 'subcategory' => $subcategory]);
+
+    }
+
+    public function updateSubCategory(Request $request)
+    {
+        $request->validate([
+            'category_id' => ['required', 'integer'],
+            'subcategory_name' => ['required'],
+        ]);
+
+        SubCategory::findOrFail($request->id)->update([
+            'category_id' => $request->category_id,
+            'subcategory_name' => $request->subcategory_name,
+            'subcategory_slug' => strtolower(str_replace(' ', '_', $request->subcategory_name)),
+        ]);
+        $notification = [
+            'message' => 'SubCategory Added Successfully',
+            'alert-type' => 'success'
+        ];
+        return redirect()->route('all.subcategory')->with($notification);
+
+    }
+
+    public function destroySubCategory($id)
+    {
+        SubCategory::findOrFail($id)->delete();
+
+        $notification = [
+            'message' => 'SubCategory Deleted Successfully',
             'alert-type' => 'success'
         ];
         return redirect()->back()->with($notification);

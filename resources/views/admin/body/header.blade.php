@@ -371,7 +371,7 @@
             <div class="px-3 user-box dropdown">
                 <a class="gap-3 d-flex align-items-center nav-link dropdown-toggle dropdown-toggle-nocaret" href="#"
                     role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    <img src="{{ !empty($amdin->photo) ? asset('upload/admin_images/' . $admin->photo) : url('upload/default.png')  }}"
+                    <img src="{{ !empty($admin->photo) ? asset('upload/admin_images/' . $admin->photo) : url('upload/default.png')  }}"
                         class="user-img" alt="user avatar">
                     <div class="user-info">
                         <p class="mb-0 user-name">{{$admin->name}}</p>
