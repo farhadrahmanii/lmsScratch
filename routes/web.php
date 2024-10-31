@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Backend\CategoryController;
+use App\Http\Controllers\Backend\CourseController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\userController;
 use App\Http\Controllers\adminController;
@@ -57,7 +58,12 @@ Route::middleware(['auth', 'verified', 'admin'])->group(function () {
         Route::patch('/subcategory/update/{id}', 'updateSubCategory')->name('update.subcategory');
         Route::get('/delete/subcategory/{id}', 'destroySubCategory')->name('delete.subcategory');
     });
-
+    //Instructor all Routes
+    Route::controller(adminController::class)->group(function () {
+        Route::get('/all/instructor', 'AllInstructor')->name('all.instructor');
+        Route::post('/user/StatusUpdate', 'UpdateUserStatus')->name('update.user.status');
+        Route::get('/instructor/create', 'CreateInstructor')->name('add.instructor');
+    });
 
 
 });
@@ -78,7 +84,19 @@ Route::middleware(['auth', 'verified', 'instructor'])->group(function () {
     Route::get('/instructor/logout', [instructorController::class, 'InstructorlogOut'])->name('instructor.logout');
     Route::post('/instructor/profile/store', [instructorController::class, 'Store'])->name('instructor.profile.store');
 
-});
+    //Instructor all Routes
+    Route::controller(CourseController::class)->group(function () {
+        Route::get('/all/courses', 'AllCourse')->name('all.courses');
+        Route::get('/add/course', 'AddCourse')->name('add.course');
+        Route::get('/subcategory/ajax/{category_id}', 'GetSubCategory');
+        Route::post('/add/course', 'StoreCourse')->name('store.course');
+        Route::get('/edit/course/{id}', 'EditCourse')->name('edit.course');
+        Route::get('/update/course/{id}', 'UpdateCourse')->name('update.course');
+        Route::get('/delete/course/{id}', 'Destory')->name('delete.course');
+    });
+
+}); // End of Instructor Dashboard
+
 Route::get('/instructor/login', [instructorController::class, 'InstructorLogin'])->name('instructor.login');
 
 

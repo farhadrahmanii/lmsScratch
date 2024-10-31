@@ -2,9 +2,17 @@
 @section('instructor')
 
 @php
-
+    $id = Auth::user()->id;
+    $instructor = App\Models\User::findOrFail($id);
+    $status = $instructor->status;
 @endphp
 <div class="page-content">
+    @if ($status === '1')
+        <h3>Instructor Account is <span class="text-success">Acitve</span></h3>
+    @else
+        <h3>Instructor Account is <span class="text-danger">Deactive</span></h3>
+        <p class='text-info'>Please Wait The Admin will Activate your account</p>
+    @endif
     <div class="row row-cols-1 row-cols-md-2 row-cols-xl-4">
         <div class="col">
             <div class="border-0 border-4 card radius-10 border-start border-info">

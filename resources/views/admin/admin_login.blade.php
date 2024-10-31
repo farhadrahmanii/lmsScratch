@@ -20,7 +20,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
     <link href="{{ asset('backend/assets/css/app.css')}}" rel="stylesheet">
     <link href="{{ asset('backend/assets/css/icons.css')}}" rel="stylesheet">
-    <title>Rocker - Bootstrap 5 Admin Dashboard Template</title>
+    <title>Admin Login</title>
 </head>
 
 <body class="">
@@ -50,7 +50,7 @@
                                         <img src="{{ asset('backend/assets/images/logo-icon.png')}}" width="60" alt="">
                                     </div>
                                     <div class="mb-4 text-center">
-                                        <h5 class="">Rocker Admin</h5>
+                                        <h5 class="">Admin</h5>
                                         <p class="mb-0">Please log in to your account</p>
                                     </div>
                                     <div class="form-body">
@@ -73,7 +73,7 @@
                                                         @error('password')
                                                             is-invalid
                                                         @enderror
-                                                        " id="password" value="12345678"
+                                                        " id="password" value=""
                                                         placeholder="Enter Password">
                                                         @error('password')
                                                         <span class=' text-danger'>{{ $message }}</span>

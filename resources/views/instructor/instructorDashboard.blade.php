@@ -28,6 +28,9 @@
     <link rel="stylesheet" href="{{ asset('backend/assets/css/header-colors.css') }}" />
     <title>Instructor Dashboard</title>
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css">
+    <!-- Data table -->
+    <link href="{{asset('backend/assets/plugins/datatable/css/dataTables.bootstrap5.min.css')}}" rel="stylesheet" />
+    <!--End  Data table -->
     @vite('resources/css/app.css')
 
 </head>
@@ -254,6 +257,10 @@
     <script src="{{ asset('backend/assets/js/index.js') }}"></script>
     <!--app JS-->
     <script src="{{ asset('backend/assets/js/app.js') }}"></script>
+    <script src="{{ asset('backend/assets/js/validate.min.js') }}"></script>
+    <!-- sweet alert -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    <script src="{{ asset('backend/assets/js/code.js') }}"></script>
     <script>
         new PerfectScrollbar(".app-container")
     </script>
@@ -281,6 +288,36 @@
                     break;
             }
         @endif
+    </script>
+    <!-- Data Table Scripts -->
+    <script src="{{asset('backend/assets/plugins/datatable/js/jquery.dataTables.min.js')}}"></script>
+    <script src="{{asset('backend/assets/plugins/datatable/js/dataTables.bootstrap5.min.js')}}"></script>
+    <script>
+        $(document).ready(function () {
+            $('#example').DataTable();
+        });
+    </script>
+    <script>
+        // $(document).ready(function () {
+        //     var table = $('#example2').DataTable({
+        //         lengthChange: false,
+        //         buttons: ['copy', 'excel', 'pdf', 'print']
+        //     });
+
+        //     table.buttons().container()
+        //         .appendTo('#example2_wrapper .col-md-6:eq(0)');
+        // });
+    </script>
+    <!-- End Data Table Scripts -->
+
+    <script src="https://cdn.tiny.cloud/1/1d0xdlc3sfscz6qy11ykp7nm9wu7xfgx20n4gtxhrshmbpwz/tinymce/7/tinymce.min.js"
+        referrerpolicy="origin"></script>
+    <script>
+        tinymce.init({
+            selector: 'textarea#myeditorinstance', // Replace this CSS selector to match the placeholder element for TinyMCE
+            plugins: 'code table lists',
+            toolbar: 'undo redo | blocks | bold italic | alignleft aligncenter alignright | indent outdent | bullist numlist | code | table'
+        });
     </script>
 
 </body>

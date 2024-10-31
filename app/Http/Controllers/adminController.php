@@ -144,4 +144,25 @@ class adminController extends Controller
         return redirect()->route('instructor.login')->with($notification);
 
     }
+    // Instructor Admin Dashboard methods
+    public function AllInstructor()
+    {
+        $allinstructors = User::where('role', 'instructor')->latest()->get();
+
+        return view('admin.backend.instructor.all_instructor', compact('allinstructors'));
+    }
+    // User Status update to instructor to user and then revert of it
+    public function UpdateUserStatus(Request $request)
+    {
+        $user_id = $request->input('user_id');
+        $status = $request->input('status', 0);
+
+        $user = User::findOrFail($user_id);
+        $user->status = $status;
+        $user->save();
+
+        return response()->json(['message' => 'User Status Updated Successfully']);
+
+    }
+
 }
