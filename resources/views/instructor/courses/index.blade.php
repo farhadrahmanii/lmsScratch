@@ -42,9 +42,14 @@
 
                             <tr>
                                 <td>{{ $key + 1 }}</td>
-                                <td><img src="{{ asset($item->image) }}" class="rounded" alt="" height="100px"
-                                        width="100px" /></td>
-                                <td>{{$item->category_name}}</td>
+                                <td><img src="{{ asset($item->course_image) }}"
+                                        style="object-fit: cover; height: 100px; width: 100px;" class="rounded" alt=""
+                                        height="100%" width="100px" /></td>
+                                <td>{{$item->course_name}}</td>
+                                <td>{{$item['category']['category_name']}}</td>
+
+                                <td>{{$item->selling_price}}</td>
+                                <td>{{$item->discount_price}}</td>
                                 <td>
                                     <a href="{{route('edit.course', $item->id)}}" class="btn btn-info">Edit</a>
                                     <a href="{{route('delete.course', $item->id)}}" class="btn btn-danger"

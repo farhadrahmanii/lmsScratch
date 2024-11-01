@@ -2,6 +2,7 @@
 @section('instructor')
 
 
+
 <!-- Jquery is loaded Here  -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 <div class="page-content">
@@ -26,11 +27,12 @@
         <div class="p-4 card-body">
             <h5 class="mb-4">Add Course</h5>
             <form class="row g-3" method="POST" id="myForm" enctype="multipart/form-data"
-                action="{{route('store.course')}}">
+                action="{{route('update.course')}}">
                 @csrf
+                <input type="hidden" name="course_id" value="{{ $course->id}}" />
                 <div class="form-group col-md-6">
                     <label for="course_name" class="form-label">Course Name</label>
-                    <input type="text" name="course_name" value="{{old('course_name')}}" class="form-control rounded-lg
+                    <input type="text" name="course_name" value="{{$course->course_name}}" class="form-control rounded-lg
                     @error('course_name')
                         is-invalid
                     @enderror
@@ -40,7 +42,7 @@
                 </div>
                 <div class="form-group col-md-6">
                     <label for="course_title" class="form-label">Course Title</label>
-                    <input type="text" value="{{old('course_title')}}" name="course_title" class="form-control rounded-lg
+                    <input type="text" value="{{$course->course_title}}" name="course_title" class="form-control rounded-lg
                     @error('course_title')
                         is-invalid
                     @enderror
@@ -50,11 +52,13 @@
 
                 <div class="form-group col-md-6">
                     <label for="category_id" class="form-label">Category</label>
-                    <select name="category_id" id="category_id" value="{{old('category_id')}}"
+                    <select name="category_id" id="category_id"
                         class="form-control rounded-lg @error('category_id') is-invalid @enderror" required>
                         <option selected disabled>Select Category</option>
                         @foreach ($category as $item)
-                            <option value="{{ $item->id }}">{{ $item->category_name }}</option>
+                            <option value="{{ $item->id }}" {{ $item->id == $course->category_id ? 'selected' : '' }}>
+                                {{ $item->category_name }}
+                            </option>
                         @endforeach
                     </select>
                     @error('category_id')
@@ -64,32 +68,32 @@
 
                 <div class="form-group col-md-6">
                     <label for="subcategory_id" class="form-label">Sub Category</label>
-                    <select name="subcategory_id" id="subcategory_id" value="{{old('subcategory_id')}}"
+                    <select name="subcategory_id" id="subcategory_id"
                         class="form-control rounded-lg @error('subcategory_id') is-invalid @enderror " required>
                         <option selected disabled>Select Subcategory</option>
+                        @foreach ($subcategory as $subcat)
+                            <option value="{{ $subcat->id }}" {{  $subcat->id == $course->subcategory_id ? 'selected' : '' }}>
+                                {{ $subcat->subcategory_name }}
+                            </option>
+                        @endforeach
                     </select>
                     @error('subcategory_id')
-                        <span class="text-red-500 text-bold">{{ $message }}</span>
+                        <span class=" text-red-500 text-bold">{{ $message }}</span>
                     @enderror
                 </div>
                 <div class="form-group col-md-6">
                     <label for="description" class="form-label">Course Description</label>
-                    <input type="text" value="{{old('description')}}" name="description" class="form-control rounded-lg
+                    <input type="text" value="{{$course->description}}" name="description" class="form-control rounded-lg
                     @error('description')
                         is-invalid
                     @enderror
                     " id="name" placeholder="Data Science" required />
                     <x-myerror error="description"></x-myerror>
                 </div>
-                <div class="form-group col-md-6">
-                    <label for="video" class="form-label">Course Video</label>
-                    <input type="file" class="p-2 rounded-lg bordered form-control" required value="{{old('video')}}"
-                        accept="video/mp4, video/webm " name="video" />
-                    <x-myerror error="video"></x-myerror>
-                </div>
+
                 <div class="form-group col-md-6">
                     <label for="duration" class="form-label">Duration</label>
-                    <input type="text" name="duration" value="{{old('duration')}}" class="form-control rounded-lg
+                    <input type="text" name="duration" value="{{$course->duration}}" class="form-control rounded-lg
                     @error('duration')
                         is-invalid 
                     @enderror
@@ -104,14 +108,14 @@
                     @enderror
                     " id="name" placeholder="Data Science" required>
                         <option selected disabled>Has Certificate</option>
-                        <option value="Yes">Yes</option>
-                        <option value="No">No</option>
+                        <option value="Yes" {{  $course->certificate == "Yes" ? 'selected' : ''}}>Yes</option>
+                        <option value="No" {{  $course->certificate == "No" ? 'selected' : ''}}>No</option>
                     </select>
                     <x-myerror error="Certificate"></x-myerror>
                 </div>
                 <div class="form-group col-md-4">
                     <label for="Resources" class="form-label">Resources</label>
-                    <input type="text" value="{{old('resources')}}" name="resources" class="form-control rounded-lg
+                    <input type="text" value="{{$course->resources}}" name="resources" class="form-control rounded-lg
                     @error('resources')
                         is-invalid 
                     @enderror
@@ -121,7 +125,7 @@
 
                 <div class="form-group col-md-4">
                     <label for="selling_price" class="form-label">Selling Price</label>
-                    <input type="number" name="selling_price" value="{{old('selling_price')}}" class="form-control rounded-lg
+                    <input type="number" name="selling_price" value="{{$course->selling_price}}" class="form-control rounded-lg
                     @error('selling_price')
                         is-invalid 
                     @enderror
@@ -130,7 +134,7 @@
                 </div>
                 <div class="form-group col-md-4">
                     <label for="discount_price" class="form-label">Discount Price</label>
-                    <input type="number" name="discount_price" value="{{old('discount_price')}}" class="form-control rounded-lg
+                    <input type="number" name="discount_price" value="{{$course->discount_price}}" class="form-control rounded-lg
                     @error('discount_price')
                         is-invalid 
                     @enderror
@@ -144,26 +148,17 @@
                         in-valid
                     @enderror
                     " id="name" placeholder="Data Science" required>
-                        <option selected disabled>Select Level</option>
-                        <option value="Begginer">Begginer</option>
-                        <option value="Middle">Middle</option>
-                        <option value="Advance">Advance</option>
+                        <option disabled>Select Level</option>
+                        <option value="Begginer" {{  $course->label == "Begginer" ? 'selected' : ''}}>Begginer
+                        </option>
+                        <option value="Middle" {{  $course->label == "Middle" ? 'selected' : ''}}>Middle</option>
+                        <option value="Advance" {{  $course->label == "Advance" ? 'selected' : ''}}>Advance</option>
                     </select>
                     <x-myerror error="label"></x-myerror>
                 </div>
-                <div class="form-group col-md-3">
-                    <label for="course_image" class="form-label">Course Image</label>
-                    <input type="file" class="p-2 rounded-lg bordered form-control" id="image" name="course_image"
-                        placeholder="First Name" />
-                    <x-myerror error="course_title"></x-myerror>
-                </div>
-                <div class="col-md-3">
-                    <img src="{{url('upload/default.png')}}" alt="category Image" id="showImage" class="rounded-circle"
-                        width="110">
-                </div>
                 <div class="form-group col-md-12">
                     <label for="prerequisites" class="form-label">Prerequesities</label>
-                    <textarea type="text" id="myeditorinstance" value="{{old('prerequisites')}}" name="prerequisites"
+                    <textarea type="text" id="myeditorinstance" value="{{$course->prerequisites}}" name="prerequisites"
                         class="form-control rounded-lg
                     @error('prerequisites')
                         is-invalid 
@@ -176,21 +171,21 @@
                     <div class="col-md-4">
                         <div class="form-check">
                             <input class="form-check-input" type="checkbox" value="1" name="featured"
-                                id="flexCheckDefault" value="{{old('featured')}}">
+                                id="flexCheckDefault" {{  $course->featured == "1" ? 'checked' : ''}}>
                             <label class="form-check-label" for="flexCheckDefault">Featured</label>
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="form-check">
                             <input class="form-check-input" type="checkbox" value="1" name="bestseller"
-                                id="flexCheckDefault" value="{{old('bestseller')}}">
+                                id="flexCheckDefault" {{  $course->bestseller == "1" ? 'checked' : ''}}>
                             <label class="form-check-label" for="flexCheckDefault">Best Seller</label>
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="form-check">
                             <input class="form-check-input" type="checkbox" value="1" name="highestrated"
-                                id="flexCheckDefault" value="{{old('highestrated')}}">
+                                id="flexCheckDefault" {{  $course->highestrated == "1" ? 'checked' : ''}}>
                             <label class="form-check-label" for="flexCheckDefault">highest rated</label>
                         </div>
                     </div>
@@ -198,24 +193,7 @@
 
 
                 <p>Course Goals</p>
-
-
-                <!--   //////////// Goal Option /////////////// -->
-
-                <div class="row add_item">
-
-                    <div class="col-md-6">
-                        <div class="mb-3">
-                            <label for="goals" class="form-label"> Goals </label>
-                            <input type="text" name="course_goals[]" id="goals" class="form-control"
-                                placeholder="Goals ">
-                        </div>
-                    </div>
-                    <div class="form-group col-md-6" style="padding-top: 30px;">
-                        <a class="btn btn-success addeventmore"><i class="fa fa-plus-circle"></i> Add More..</a>
-                    </div>
-                </div> <!---end row-->
-                <!-- End Course Goal -->
+                <!-- Course goal is removed fix this issue back when you try add -->
 
                 <div class="col-md-12">
                     <div class="gap-3 d-md-flex d-grid align-items-center">
@@ -226,35 +204,36 @@
             </form>
         </div>
     </div>
-</div>
 
+    <div class="page-content">
+        <div class="card">
+            <div class="card-body">
+                <form action="" method="POST" enctype="multipart/form-data">
+                    @csrf
+                    <div class="row">
 
+                        <div class="form-group col-md-3">
+                            <label for="course_image" class="form-label">Course Image</label>
+                            <input type="file" class="p-2 rounded-lg bordered form-control" id="image"
+                                name="course_image" placeholder="First Name" />
+                            <x-myerror error="course_title"></x-myerror>
+                        </div>
 
-<!--========== Start of add multiple class with ajax ==============-->
-<div style="visibility: hidden">
-    <div class="whole_extra_item_add" id="whole_extra_item_add">
-        <div class="whole_extra_item_delete" id="whole_extra_item_delete">
-            <div class="container mt-2">
-                <div class="row">
-
-
-                    <div class="form-group col-md-6">
-                        <label for="goals">Goals</label>
-                        <input type="text" name="course_goals[]" id="goals" class="form-control" placeholder="Goals  ">
+                        <div class="col-md-3">
+                            <img src="{{url('upload/default.png')}}" alt="category Image" id="showImage"
+                                class="rounded-circle" width="110">
+                        </div>
                     </div>
-                    <div class="form-group col-md-6" style="padding-top: 20px">
-                        <span class="btn btn-success btn-sm addeventmore"><i class="fa fa-plus-circle">Add</i></span>
-                        <span class="btn btn-danger btn-sm removeeventmore"><i
-                                class="fa fa-minus-circle">Remove</i></span>
-                    </div>
-                </div>
+                </form>
             </div>
         </div>
     </div>
+
+
 </div>
 
 
-<!----For Section-------->
+
 <script type="text/javascript">
     $(document).ready(function () {
         var counter = 0;

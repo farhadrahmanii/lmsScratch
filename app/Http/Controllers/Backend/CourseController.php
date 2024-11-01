@@ -5,9 +5,12 @@ namespace App\Http\Controllers\Backend;
 use App\Http\Controllers\Controller;
 
 use App\Models\Course;
+use App\Models\Course_goal;
 use App\Models\SubCategory;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Intervention\Image\Laravel\Facades\Image;
 use App\Models\Category;
 
 class CourseController extends Controller
@@ -46,7 +49,64 @@ class CourseController extends Controller
      */
     public function StoreCourse(Request $request)
     {
-        dd($request->all());
+        $request->validate([
+            'video' => ['required'],
+        ]);
+        $image = $request->file('course_image');
+        $name_gen = hexdec(uniqid()) . '.' . $image->getClientOriginalExtension();
+        $image = Image::read($image->path());
+        $image->resize(370, 246);
+        $save_url = 'upload/course/thumbnail/' . $name_gen;
+        $image->save($save_url);
+
+
+        $video = $request->file('video');
+        $videoName = time() . '.' . $video->getClientOriginalExtension();
+        $videoPath = 'upload/course/video/' . $videoName;
+        $video->move(public_path('upload/course/video'), $videoName);
+
+
+        $course = Course::insertGetId([
+            'category_id' => $request->category_id,
+            'subcategory_id' => $request->subcategory_id,
+            'instructor_id' => Auth::user()->id,
+            'course_name' => $request->course_name,
+            'course_name_slug' => strtolower(str_replace(' ', '-', $request->course_name)),
+            'course_title' => $request->course_title,
+            'selling_price' => $request->selling_price,
+            'discount_price' => $request->selling_price,
+            'label' => $request->label,
+            'duration' => $request->duration,
+            'description' => $request->description,
+            'certificate' => $request->certificate,
+            'resources' => $request->resources,
+            'prerequisites' => $request->prerequisites,
+            'highestrated' => $request->highestrated,
+            'featured' => $request->featured,
+            'bestseller' => $request->bestseller,
+            'status' => 1,
+            'course_image' => $save_url,
+            'video' => $save_url,
+            'created_at' => Carbon::now(),
+
+        ]);
+
+
+        if ($request->course_goals) {
+            foreach ($request->course_goals as $goal) {
+                Course_goal::create([
+                    'course_id' => $course,
+                    'goal_name' => $goal,
+                ]);
+            }
+        }
+
+        $notification = array(
+            'message' => 'Course Added Successfully',
+            'alert-type' => 'success'
+        );
+
+        return redirect()->route('all.courses')->with($notification);
     }
 
     /**
@@ -60,17 +120,49 @@ class CourseController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Course $course)
+    public function EditCourse($id)
     {
-        //
+        $course = Course::findOrFail($id);
+        $category = Category::latest()->get();
+        $subcategory = subCategory::latest()->get();
+        return view('instructor.courses.edit', compact('course', 'subcategory', 'category'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Course $course)
+    public function UpdateCourse(Request $request)
     {
-        //
+
+        $cid = $request->course_id;
+        Course::findOrFail($cid)->update([
+            'category_id' => $request->category_id,
+            'subcategory_id' => $request->subcategory_id,
+            'instructor_id' => Auth::user()->id,
+            'course_name' => $request->course_name,
+            'course_name_slug' => strtolower(str_replace(' ', '-', $request->course_name)),
+            'course_title' => $request->course_title,
+            'selling_price' => $request->selling_price,
+            'discount_price' => $request->discount_price,
+            'label' => $request->label,
+            'duration' => $request->duration,
+            'description' => $request->description,
+            'certificate' => $request->certificate,
+            'resources' => $request->resources,
+            'prerequisites' => $request->prerequisites,
+            'highestrated' => $request->highestrated,
+            'featured' => $request->featured,
+            'bestseller' => $request->bestseller,
+            'status' => 1,
+        ]);
+
+
+        $notification = array(
+            'message' => 'Course Updated Successfully',
+            'alert-type' => 'success'
+        );
+
+        return redirect()->route('all.courses')->with($notification);
     }
 
     /**
