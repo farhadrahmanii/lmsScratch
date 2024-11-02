@@ -86,7 +86,7 @@ class CourseController extends Controller
             'bestseller' => $request->bestseller,
             'status' => 1,
             'course_image' => $save_url,
-            'video' => $save_url,
+            'video' => $videoPath,
             'created_at' => Carbon::now(),
 
         ]);
@@ -123,9 +123,10 @@ class CourseController extends Controller
     public function EditCourse($id)
     {
         $course = Course::findOrFail($id);
+        $goals = Course_goal::where('course_id', $id)->get();
         $category = Category::latest()->get();
         $subcategory = subCategory::latest()->get();
-        return view('instructor.courses.edit', compact('course', 'subcategory', 'category'));
+        return view('instructor.courses.edit', compact('course', 'subcategory', 'category', 'goals'));
     }
 
     /**
@@ -168,8 +169,99 @@ class CourseController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Course $course)
+    public function Destory($id)
     {
-        //
+        $course = Course::findOrFail($id);
+        unlink($course->course_image);
+        unlink($course->video);
+        $course->delete();
+
+        $goalsData = Course_goal::where('course_id', $id)->get();
+        foreach ($goalsData as $goal) {
+
+            $goal->delete();
+        }
+        $notification = array(
+            'message' => 'Course Deleted Successfully',
+            'alert-type' => 'success'
+        );
+        return redirect()->back()->with($notification);
+    }
+    // Update Course Image 
+    public function UpdateCourseImage(Request $request)
+    {
+        $course_image = $request->file('course_image');
+        $name_gen = hexdec(uniqid()) . '.' . $course_image->getClientOriginalExtension();
+        $course_image = Image::read($course_image->path());
+        $course_image->resize(370, 246);
+        $save_url = 'upload/course/thumbnail/' . $name_gen;
+        $course_image->save($save_url);
+
+        Course::findOrFail($request->course_id)->update([
+            'course_image' => $save_url,
+            'updated_at' => Carbon::now(),
+        ]);
+        if ($request->old_image) {
+            unlink($request->old_image);
+        }
+
+        $notification = array(
+            'message' => 'Course Image Updated Successfully',
+            'alert-type' => 'success'
+        );
+
+        return redirect()->route('all.courses')->with($notification);
+    }
+    public function UpdateCourseVideo(Request $request)
+    {
+        $video = $request->file('video');
+        $name_gen = hexdec(uniqid()) . '.' . $video->getClientOriginalExtension();
+        $save_url = 'upload/course/video/' . $name_gen;
+
+        // Move the video file to the designated path
+        $video->move(public_path('upload/course/video'), $name_gen);
+
+        // Update the course with the new video path
+        Course::findOrFail($request->course_id)->update([
+            'video' => $save_url,
+            'updated_at' => Carbon::now(),
+        ]);
+        // Delete the old video file if it exists
+        if ($request->old_video) {
+            if (file_exists(public_path($request->old_video))) {
+                unlink(public_path($request->old_video));
+            }
+        }
+
+        $notification = array(
+            'message' => 'Course Video Updated Successfully',
+            'alert-type' => 'success'
+        );
+
+        return redirect()->back()->with($notification);
+    }
+    public function UpdateCourseGoal(Request $request)
+    {
+        if ($request->course_goals == null) {
+            return redirect()->back()->with('error', 'No Course Goals Found');
+        } else {
+            Course_goal::where('course_id', $request->id)->delete();
+
+            if ($request->course_goals) {
+                foreach ($request->course_goals as $goal) {
+                    Course_goal::create([
+                        'course_id' => $request->id,
+                        'goal_name' => $goal,
+                    ]);
+                }
+            }
+        }
+
+        $notification = array(
+            'message' => 'Course Goals are Updated Successfully',
+            'alert-type' => 'success'
+        );
+
+        return redirect()->back()->with($notification);
     }
 }
