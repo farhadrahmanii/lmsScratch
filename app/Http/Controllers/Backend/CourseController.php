@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 
 use App\Models\Course;
 use App\Models\Course_goal;
+use App\Models\CourseLecture;
+use App\Models\CourseSection;
 use App\Models\SubCategory;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -264,4 +266,101 @@ class CourseController extends Controller
 
         return redirect()->back()->with($notification);
     }
+
+    // Course section and lecture 
+    public function AddCourseLecture($id)
+    {
+        $course = Course::findOrFail($id);
+        $courseSection = CourseSection::where('course_id', $id)->get();
+        return view('instructor.courses.section.addCourseLecture ', compact('course', 'courseSection'));
+    }
+    public function AddCourseSection(Request $request)
+    {
+        $course = Course::findOrFail($request->course_id);
+
+        if ($course) {
+            CourseSection::insert([
+                'course_id' => $request->course_id,
+                'section_title' => $request->section_title,
+                'created_at' => Carbon::now(),
+            ]);
+
+            $notification = array(
+                'message' => 'Course Section Inserted Successfully',
+                'alert-type' => 'success'
+            );
+
+            return redirect()->back()->with($notification);
+        } else {
+            $notification = array(
+                'message' => 'Course Not Found',
+                'alert-type' => 'error'
+            );
+
+            return redirect()->back()->with($notification);
+        }
+
+    }
+    public function SaveLecture(Request $request)
+    {
+        $lecture = new CourseLecture();
+        $lecture->course_id = $request->course_id;
+        $lecture->section_id = $request->section_id;
+        $lecture->lecture_title = $request->lecture_title;
+        $lecture->content = $request->content;
+        $lecture->url = $request->url;
+        $lecture->save();
+
+        $notification = array(
+            'message' => 'Lecture is saved successfully',
+            'alert-type' => 'success'
+        );
+        return response()->json(['success' => 'Lecture is saved successfully']);
+
+    }
+    public function EditLecture($id)
+    {
+        $clecture = CourseLecture::findOrFail($id);
+        return view('instructor.courses.lecture.edit_course_lecture', compact('clecture'));
+    }
+    public function UpdateourseLecture(Request $request)
+    {
+        $lid = $request->id;
+        CourseLecture::findOrFail($lid)->update([
+            'lecture_title' => $request->lecture_title,
+            'content' => $request->content,
+            'url' => $request->url,
+        ]);
+        $notification = array(
+            'message' => 'Course Lecture Updated Successfully',
+            'alert-type' => 'success'
+        );
+        return redirect()->back()->with($notification);
+    }
+    public function DeleteLecture($id)
+    {
+        CourseLecture::findOrFail($id)->delete();
+        $notification = array(
+            'message' => 'Course Lecture Deleted Successfully',
+            'alert-type' => 'success'
+        );
+        return redirect()->back()->with($notification);
+    }
+
+    public function DeleteSection($id)
+    {
+        $sectionId = CourseSection::findOrFail($id);
+        // Delete All Related Lectures
+
+        $sectionId->lectures()->delete();
+        // Delete Section
+        $sectionId->delete();
+        $notification = array(
+            'message' => 'Course Section Deleted Successfully',
+            'alert-type' => 'success'
+        );
+        return redirect()->back()->with($notification);
+
+    }
+
 }
