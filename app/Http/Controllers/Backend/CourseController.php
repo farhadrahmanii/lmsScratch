@@ -76,7 +76,7 @@ class CourseController extends Controller
             'course_name_slug' => strtolower(str_replace(' ', '-', $request->course_name)),
             'course_title' => $request->course_title,
             'selling_price' => $request->selling_price,
-            'discount_price' => $request->selling_price,
+            'discount_price' => $request->discount_price,
             'label' => $request->label,
             'duration' => $request->duration,
             'description' => $request->description,
