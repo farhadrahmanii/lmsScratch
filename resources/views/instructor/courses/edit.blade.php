@@ -81,17 +81,17 @@
                         <span class=" text-red-500 text-bold">{{ $message }}</span>
                     @enderror
                 </div>
-                <div class="form-group col-md-6">
+                <div class="form-group col-md-12">
                     <label for="description" class="form-label">Course Description</label>
-                    <input type="text" value="{{$course->description}}" name="description" class="form-control rounded-lg
+                    <textarea id="myeditorinstance" name="description" class="form-control rounded-lg
                     @error('description')
                         is-invalid
                     @enderror
-                    " id="name" placeholder="Data Science" required />
+                    " id="name" placeholder="Write Clean Description" required>{{$course->description}}</textarea>
                     <x-myerror error="description"></x-myerror>
                 </div>
 
-                <div class="form-group col-md-6">
+                <div class="form-group col-md-4">
                     <label for="duration" class="form-label">Duration</label>
                     <input type="text" name="duration" value="{{$course->duration}}" class="form-control rounded-lg
                     @error('duration')
@@ -100,7 +100,22 @@
                     " id="label" placeholder="Data Science" required />
                     <x-myerror error="duration"></x-myerror>
                 </div>
-                <div class="form-group col-md-6">
+                <div class="form-group col-md-4">
+                    <label for="label" class="form-label">Label</label>
+                    <select name="label" class="form-control rounded-lg
+                    @error('label')
+                        in-valid
+                    @enderror
+                    " id="name" placeholder="Data Science" required>
+                        <option disabled>Select Level</option>
+                        <option value="Begginer" {{  $course->label == "Begginer" ? 'selected' : ''}}>Begginer
+                        </option>
+                        <option value="Middle" {{  $course->label == "Middle" ? 'selected' : ''}}>Middle</option>
+                        <option value="Advance" {{  $course->label == "Advance" ? 'selected' : ''}}>Advance</option>
+                    </select>
+                    <x-myerror error="label"></x-myerror>
+                </div>
+                <div class="form-group col-md-4">
                     <label for="Certificate" class="form-label">Certificate</label>
                     <select name="certificate" class="form-control rounded-lg
                     @error('Certificate')
@@ -141,29 +156,13 @@
                     " id="label" placeholder="Data Science" required />
                     <x-myerror error="discount_price"></x-myerror>
                 </div>
-                <div class="form-group col-md-4">
-                    <label for="label" class="form-label">Label</label>
-                    <select name="label" class="form-control rounded-lg
-                    @error('label')
-                        in-valid
-                    @enderror
-                    " id="name" placeholder="Data Science" required>
-                        <option disabled>Select Level</option>
-                        <option value="Begginer" {{  $course->label == "Begginer" ? 'selected' : ''}}>Begginer
-                        </option>
-                        <option value="Middle" {{  $course->label == "Middle" ? 'selected' : ''}}>Middle</option>
-                        <option value="Advance" {{  $course->label == "Advance" ? 'selected' : ''}}>Advance</option>
-                    </select>
-                    <x-myerror error="label"></x-myerror>
-                </div>
                 <div class="form-group col-md-12">
                     <label for="prerequisites" class="form-label">Prerequesities</label>
-                    <textarea type="text" id="myeditorinstance" value="{{$course->prerequisites}}" name="prerequisites"
-                        class="form-control rounded-lg
+                    <textarea type="text" id="myeditorinstance" name="prerequisites" class="form-control rounded-lg
                     @error('prerequisites')
                         is-invalid 
                     @enderror
-                    " id="label" placeholder="Data Science" required></textarea>
+                    " id="label" placeholder="Data Science" required>{{$course->prerequisites}}</textarea>
                     <x-myerror error="prerequisites"></x-myerror>
                 </div>
 

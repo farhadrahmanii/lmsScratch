@@ -16,4 +16,8 @@ class Course extends Model
     {
         return $this->belongsTo(User::class, 'instructor_id', 'id');
     }
+    public function subCategory()
+    {
+        return $this->belongsTo(SubCategory::class, 'subcategory_id', 'id');
+    }
 }

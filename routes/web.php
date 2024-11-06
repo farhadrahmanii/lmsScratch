@@ -1,14 +1,18 @@
 <?php
 
+use App\Http\Controllers\adminController;
 use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Backend\CourseController;
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\userController;
-use App\Http\Controllers\adminController;
-use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\Controller;
+use App\Http\Controllers\Frontend\IndexController;
 use App\Http\Controllers\instructorController;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\userController;
 use App\Http\Middleware\instructor;
 use App\Http\Middleware\Role;
+use Illuminate\Support\Facades\Route;
+
+
 
 
 
@@ -129,3 +133,6 @@ Route::get('/instructor/login', [instructorController::class, 'InstructorLogin']
 Route::middleware(['auth', 'verified', 'user'])->group(function () {
 
 });
+
+// Route access for all 
+Route::get('/course/details/{id}/{slug}', [IndexController::class, 'CourseDetails'])->name('course.details');

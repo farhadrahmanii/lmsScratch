@@ -32,7 +32,8 @@
                                                 <div class="col-lg-4 responsive-column-half">
                                                     <div class="card card-item card-preview" data-tooltip-content="#tooltip_content_1">
                                                         <div class="card-image">
-                                                            <a href="course-details.html" class="d-block">
+                                                            <a href="{{url('/course/details/' . $courseItem->id . '/' . $courseItem->course_name_slug)}}"
+                                                                class="d-block">
                                                                 <img class="card-img-top lazy" src="images/img-loading.png"
                                                                     data-src="{{$courseItem->course_image}}" alt="Card image cap">
                                                             </a>
