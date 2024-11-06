@@ -765,7 +765,7 @@
                                 <li class="d-flex align-items-center justify-content-between"><span><i
                                             class="la la-language mr-2 text-color"></i>Language</span> English</li>
                                 <li class="d-flex align-items-center justify-content-between"><span><i
-                                            class="la la-lightbulb mr-2 text-color"></i>Skill level</span> All levels
+                                            class="la la-lightbulb mr-2 text-color"></i>Skill level</span> {{$course->label}}
                                 </li>
                                 <li class="d-flex align-items-center justify-content-between"><span><i
                                             class="la la-users mr-2 text-color"></i>Students</span> 30,506</li>
