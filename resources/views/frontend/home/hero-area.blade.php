@@ -69,4 +69,3 @@
         </div><!-- end hero-slider-item -->
     </div><!-- end hero-slide -->
 </section>
-<

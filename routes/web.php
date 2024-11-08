@@ -136,3 +136,4 @@ Route::middleware(['auth', 'verified', 'user'])->group(function () {
 
 // Route access for all 
 Route::get('/course/details/{id}/{slug}', [IndexController::class, 'CourseDetails'])->name('course.details');
+Route::get('/category/{id}/{slug}', [IndexController::class, 'CourseCategory']);
