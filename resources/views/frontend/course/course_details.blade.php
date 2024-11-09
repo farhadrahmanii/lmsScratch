@@ -776,7 +776,9 @@
                             <div class="divider"><span></span></div>
                             <ul class="generic-list-item">
                                 @foreach ($categories as $categories_item)
-                                    <li><a href="#">{{ $categories_item->category_name }}</a></li>
+                                    <li><a
+                                            href="{{ url('/category/' . $categories_item->id . '/' . $categories_item->category_slug) }}">{{ $categories_item->category_name }}</a>
+                                    </li>
                                 @endforeach
 
                             </ul>

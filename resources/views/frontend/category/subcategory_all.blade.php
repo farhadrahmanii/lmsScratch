@@ -16,12 +16,13 @@
     <div class="container">
         <div class="breadcrumb-content d-flex flex-wrap align-items-center justify-content-between">
             <div class="section-heading">
-                <h2 class="section__title text-white">{{ $category->category_name }}</h2>
+                <h2 class="section__title text-white">{{ $subcategory->subcategory_name }}</h2>
             </div>
             <ul
                 class="generic-list-item generic-list-item-white generic-list-item-arrow d-flex flex-wrap align-items-center">
                 <li><a href="{{route('home')}}">Home</a></li>
-                <li>{{ $category->category_name }}</li>
+                <li>{{ $subcategory->category->subcategory_name }}</li>
+                <li>{{ $subcategory->subcategory_name }}</li>
             </ul>
         </div><!-- end breadcrumb-content -->
     </div><!-- end container -->

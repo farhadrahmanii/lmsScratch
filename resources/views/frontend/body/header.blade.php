@@ -106,15 +106,18 @@
                                                                                             $subCategory = App\Models\SubCategory::where('category_id', $cat_item->id)->get();
                                                                                         @endphp
                                                                                         <li>
-                                                                                            <a href="course-grid.html">{{ $cat_item->category_name }} <i
-                                                                                                    class="la la-angle-right"></i></a>
+                                                                                            <a
+                                                                                                href="{{ url('/category/' . $cat_item->id . '/' . $cat_item->category_slug) }}">{{ $cat_item->category_name }}
+                                                                                                <i class="la la-angle-right"></i></a>
                                                                                             <ul class="sub-menu">
                                                                                                 @foreach ($subCategory as $subItems)
                                                                                                     <!-- ===================Attention please Here====================================== -->
                                                                                                     @if ($subItems == null)
                                                                                                         <li>don't Have SubCategory</li>
                                                                                                     @else
-                                                                                                        <li><a href="#">{{ $subItems->subcategory_name }}</a></li>
+                                                                                                        <li><a
+                                                                                                                href="{{ url('/subcategory/' . $subItems->id . '/' . $subItems->subcategory_slug) }}">{{ $subItems->subcategory_name }}</a>
+                                                                                                        </li>
                                                                                                     @endif
                                                                                                 @endforeach
                                                                                             </ul>
