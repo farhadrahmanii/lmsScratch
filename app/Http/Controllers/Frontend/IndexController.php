@@ -3,16 +3,18 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+use App\Models\Category;
 use App\Models\Course;
 use App\Models\Course_goal;
 use App\Models\CourseLecture;
 use App\Models\CourseSection;
 use App\Models\SubCategory;
+use App\Models\User;
 use Carbon\Carbon;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Intervention\Image\Laravel\Facades\Image;
-use App\Models\Category;
+
 class IndexController extends Controller
 {
     public function CourseDetails($id, $slug)
@@ -47,6 +49,14 @@ class IndexController extends Controller
         $categories = Category::latest()->get();
 
         return view('frontend.category.subcategory_all', compact('courses', 'subcategory', 'categories'));
+    }// End Method
+
+    public function InstructorDetails($id)
+    {
+        $instructor = User::findOrFail($id);
+        $ins_courses = Course::where('instructor_id', $id)->latest()->limit(6)->get();
+
+        return view('frontend.instructor.instructor_details', compact('instructor', 'ins_courses'));
     }// End Method
 
 }

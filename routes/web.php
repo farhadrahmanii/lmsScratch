@@ -138,3 +138,4 @@ Route::middleware(['auth', 'verified', 'user'])->group(function () {
 Route::get('/course/details/{id}/{slug}', [IndexController::class, 'CourseDetails'])->name('course.details');
 Route::get('/category/{id}/{slug}', [IndexController::class, 'CourseCategory']);
 Route::get('/subcategory/{id}/{slug}', [IndexController::class, 'CourseSubCategory']);
+Route::get('/instructor/{id}', [IndexController::class, 'InstructorDetails'])->name('instructor.details');

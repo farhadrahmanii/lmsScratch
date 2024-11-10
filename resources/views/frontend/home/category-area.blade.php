@@ -16,8 +16,7 @@
             </div><!-- end col-lg-9 -->
             <div class="col-lg-3">
                 <div class="text-right category-btn-box">
-                    <a href="categories.html" class="btn theme-btn">All Categories <i
-                            class="ml-1 la la-arrow-right icon"></i></a>
+                    <a href="#" class="btn theme-btn">All Categories <i class="ml-1 la la-arrow-right icon"></i></a>
                 </div><!-- end category-btn-box-->
             </div><!-- end col-lg-3 -->
         </div><!-- end row -->

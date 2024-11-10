@@ -895,7 +895,9 @@
                                     <div class="card-body">
                                         <h6 class="ribbon ribbon-blue-bg fs-14 mb-3">{{$ins_courses_item->label}}</h6>
                                         <h5 class="card-title"><a href="course-details.html">{{$ins_courses_item->course_name}}</a></h5>
-                                        <p class="card-text"><a href="teacher-detail.html">{{$course['user']['name']}}</a></p>
+                                        <p class="card-text"><a
+                                                href="{{ route('instructor.details', $ins_courses_item->instructor_id) }}">{{$course['user']['name']}}</a>
+                                        </p>
                                         <div class="rating-wrap d-flex align-items-center py-2">
                                             <div class="review-stars">
                                                 <span class="rating-number">4.4</span>
