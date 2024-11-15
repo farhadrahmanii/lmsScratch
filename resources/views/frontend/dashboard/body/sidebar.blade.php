@@ -4,7 +4,7 @@
         <i class="la la-times"></i>
     </div><!-- end off-canvas-menu-close -->
     <div class="px-4 logo-box">
-        <a href="index.html" class="logo"><img src="{{asset('frontend/images/logo.png')}}" alt="logo"></a>
+        <a href="{{ route('dashboard') }}" class="logo"><img src="{{asset('frontend/images/logo.png')}}" alt="logo"></a>
     </div>
     <ul class="generic-list-item off-canvas-menu-list off--canvas-menu-list pt-35px">
         <li class="page-active"><a href="{{route('dashboard')}}"><svg class="mr-2" xmlns="http://www.w3.org/2000/svg"
@@ -35,11 +35,11 @@
                             d="M11,21h-1l1-7H7.5c-0.88,0-0.33-0.75-0.31-0.78C8.48,10.94,10.42,7.54,13.01,3h1l-1,7h3.51c0.4,0,0.62,0.19,0.4,0.66 C12.97,17.55,11,21,11,21z" />
                     </g>
                 </svg> Quiz Attempts</a></li>
-        <li><a href="dashboard-bookmark.html"><svg class="mr-2" xmlns="http://www.w3.org/2000/svg" height="18px"
+        <li><a href="{{route('user.wishlist')}}"><svg class="mr-2" xmlns="http://www.w3.org/2000/svg" height="18px"
                     viewBox="0 0 24 24" width="18px">
                     <path d="M0 0h24v24H0V0z" fill="none" />
                     <path d="M17 3H7c-1.1 0-2 .9-2 2v16l7-3 7 3V5c0-1.1-.9-2-2-2zm0 15l-5-2.18L7 18V5h10v13z" />
-                </svg> Bookmarks</a></li>
+                </svg> Wishlist <span class="p-1 ml-2 badge badge-info" id="wishQty">2</span></a></li>
         <li><a href="dashboard-enrolled-courses.html"><svg class="mr-2" xmlns="http://www.w3.org/2000/svg" height="18px"
                     viewBox="0 0 24 24" width="18px">
                     <path d="M0 0h24v24H0V0z" fill="none" />

@@ -16,8 +16,10 @@
 
     <!-- Favicon -->
     <link rel="icon" sizes="16x16" href="{{asset('frontend/images/favicon.png')}}">
-
     <!-- inject:css -->
+    <!-- Meta For Laravel -->
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <!-- End Meta For Laravel  -->
     <link rel="stylesheet" href="{{asset('frontend/css/bootstrap.min.css')}}">
     <link rel="stylesheet" href="{{asset('frontend/css/line-awesome.css')}}">
     <link rel="stylesheet" href="{{asset('frontend/css/owl.carousel.min.css')}}">
@@ -88,6 +90,10 @@
     <script>
         var player = new Plyr('#player');
     </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    @include('frontend.body.script')
+
 </body>
 
 </html>

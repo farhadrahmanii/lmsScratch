@@ -1,9 +1,3 @@
-use App\Models\Category;
-use App\Models\Course;
-use App\Models\Course_goal;
-
-
-
 @php
     $course = App\Models\Course::where('status', 1)->orderBy('id', 'ASC')->limit(6)->get();
     $category = App\Models\Category::orderBy('id', 'ASC')->limit(6)->get();
@@ -96,7 +90,8 @@ use App\Models\Course_goal;
                                                                     </p>
                                                                 @endif
                                                                 <div class="shadow-sm cursor-pointer icon-element icon-element-sm"
-                                                                    title="Add to Wishlist"><i class="la la-heart-o"></i></div>
+                                                                    title="Add to Wishlist" id="{{$courseItem->id}}"
+                                                                    onclick="addToWishList(this.id)"><i class="la la-heart-o"></i></div>
                                                             </div>
                                                         </div><!-- end card-body -->
                                                     </div><!-- end card -->
@@ -199,5 +194,7 @@ use App\Models\Course_goal;
 
     @endforeach
     <!-- End ToolTips -->
+
+
 
 </section><!-- end courses-area -->
