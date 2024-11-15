@@ -333,7 +333,7 @@
         <div class="row pt-30px">
             @foreach ($ins_courses as $item)
                         <div class="col-lg-4 responsive-column-half">
-                            <div class="card card-item card-preview" data-tooltip-content="#tooltip_content_1">
+                            <div class="card card-item card-preview" data-tooltip-content="#tooltip_content_1{{$item->id}}">
                                 <div class="card-image">
                                     <a href="{{route('course.details', [$item->id, $item->course_name_slug])}}" class="d-block">
                                         <img class="card-img-top lazy" src="{{url($item->course_image)}}" data-src="images/img8.jpg"
@@ -428,45 +428,56 @@
 
 
 
+<!-- ToolTips -->
+@foreach ($ins_courses as $courseItem)
 
-
-
-
-
-<div class="tooltip_templates">
-    <div id="tooltip_content_1">
-        <div class="card card-item">
-            <div class="card-body">
-                <p class="card-text pb-2">By <a href="teacher-detail.html">Jose Portilla</a></p>
-                <h5 class="card-title pb-1"><a href="course-details.html">The Business Intelligence Analyst Course
-                        2021</a></h5>
-                <div class="d-flex align-items-center pb-1">
-                    <h6 class="ribbon fs-14 mr-2">Bestseller</h6>
-                    <p class="text-success fs-14 font-weight-medium">Updated<span class="font-weight-bold pl-1">November
-                            2020</span></p>
+    <div class="tooltip_templates">
+        <div id="tooltip_content_1{{$courseItem->id}}">
+            <div class="card card-item">
+                <div class="card-body">
+                    <p class="pb-2 card-text">By <a
+                            href="{{ route('instructor.details', $courseItem->instructor_id) }}">{{ $courseItem['user']['name'] }}</a>
+                    </p>
+                    <h5 class="pb-1 card-title"><a
+                            href="{{url('/course/details/' . $courseItem->id . '/' . $courseItem->course_name_slug)}}">{{$courseItem->course_name}}</a>
+                    </h5>
+                    <div class="pb-1 d-flex align-items-center">
+                        @if ($courseItem->bestseller == '1')
+                            <h6 class="mr-2 ribbon fs-14">Bestseller</h6>
+                        @endif
+                        <p class="text-success fs-14 font-weight-medium">Updated<span
+                                class="pl-1 font-weight-bold">{{ $courseItem->updated_at == null ? $courseItem->created_at->diffForHumans() : $courseItem->updated_at->diffForHumans()  }}</span>
+                        </p>
+                    </div>
+                    <ul
+                        class="generic-list-item generic-list-item-bullet generic-list-item--bullet d-flex align-items-center fs-14">
+                        <li>{{$courseItem->duration}}</li>
+                        <li>{{ $courseItem->label }}</li>
+                    </ul>
+                    @php
+                        $courseGoal = App\Models\Course_goal::where('course_id', $courseItem->id)->orderBy('id', 'DESC')->get();
+                    @endphp
+                    <p class="pt-1 card-text fs-14 lh-22">
+                        {{ $courseItem->course_title}}
+                    </p>
+                    <ul class="py-3 generic-list-item fs-14">
+                        @foreach ($courseGoal as $goalItem)
+                            <li><i class="mr-1 text-black la la-check"></i> {{$goalItem->goal_name}}</li>
+                        @endforeach
+                    </ul>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <a href="#" class="mr-3 btn theme-btn flex-grow-1"><i class="mr-1 la la-shopping-cart fs-18"></i>
+                            Add to Cart</a>
+                        <div class="shadow-sm cursor-pointer icon-element icon-element-sm" title="Add to Wishlist"><i
+                                class="la la-heart-o"></i></div>
+                    </div>
                 </div>
-                <ul
-                    class="generic-list-item generic-list-item-bullet generic-list-item--bullet d-flex align-items-center fs-14">
-                    <li>23 total hours</li>
-                    <li>All Levels</li>
-                </ul>
-                <p class="card-text pt-1 fs-14 lh-22">The skills you need to become a BI Analyst - Statistics, Database
-                    theory, SQL, Tableau – Everything is included</p>
-                <ul class="generic-list-item fs-14 py-3">
-                    <li><i class="la la-check mr-1 text-black"></i> Become an expert in Statistics, SQL, Tableau, and
-                        problem solving</li>
-                    <li><i class="la la-check mr-1 text-black"></i> Boost your resume with in-demand skills</li>
-                    <li><i class="la la-check mr-1 text-black"></i> Gather, organize, analyze and visualize data</li>
-                </ul>
-                <div class="d-flex justify-content-between align-items-center">
-                    <a href="course-details.html" class="btn theme-btn flex-grow-1 mr-3">Go to course</a>
-                    <div class="icon-element icon-element-sm shadow-sm cursor-pointer" title="Add to Wishlist"><i
-                            class="la la-heart-o"></i></div>
-                </div>
-            </div>
-        </div><!-- end card -->
-    </div>
-</div><!-- end tooltip_templates -->
+            </div><!-- end card -->
+        </div>
+    </div><!-- end tooltip_templates -->
+
+@endforeach
+<!-- End ToolTips -->
 
 
 

@@ -47,7 +47,8 @@
                         <span class="student-total pl-2">540,815 students</span>
                     </div>
                 </div><!-- end d-flex -->
-                <p class="pt-2 pb-1">Created by <a href="teacher-detail.html" class="text-color hover-underline">Tim
+                <p class="pt-2 pb-1">Created by <a href="{{ route('instructor.details', $course->instructor_id) }}"
+                        class="text-color hover-underline">Tim
                         {{ $course['user']['name'] }}</a></p>
                 <div class="d-flex flex-wrap align-items-center">
                     <p class="pr-3 d-flex align-items-center">
@@ -365,8 +366,7 @@
                                 <div class="media-body">
                                     <h5><a href="teacher-detail.html">{{$course['user']['name']}}</a></h5>
                                     <span class="d-block lh-18 pt-2 pb-3">Joined
-                                        {{ Carbon\Carbon::parse(($course['user']['updated_at']))->diffForHumans() }}
-                                        years ago</span>
+                                        {{ Carbon\Carbon::parse(($course['user']['updated_at']))->diffForHumans() }}</span>
                                     <p class="text-black lh-18 pb-3">{{$course['user']['email']}}</p>
                                     <p class="pb-3">Lorem Ipsum is simply dummy text of the printing and typesetting
                                         industry. Lorem Ipsum has been the industry’s standard dummy text ever since the

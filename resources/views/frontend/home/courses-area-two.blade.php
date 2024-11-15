@@ -21,7 +21,7 @@
                         <h6 class="mb-3 ribbon ribbon-blue-bg fs-14">All Levels</h6>
                         <h5 class="card-title"><a href="course-details.html">The Complete WordPress Website Business
                                 Course</a></h5>
-                        <p class="card-text"><a href="teacher-detail.html">Jose Portilla</a></p>
+                        <p class="card-text"><a href="teacher-detail.html">Devvvvvvvvv</a></p>
                         <div class="py-2 rating-wrap d-flex align-items-center">
                             <div class="review-stars">
                                 <span class="rating-number">4.4</span>
