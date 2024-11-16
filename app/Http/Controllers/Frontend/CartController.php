@@ -69,4 +69,12 @@ class CartController extends Controller
 
     }
     // End of Method
+    public function RemoveMiniCart($id)
+    {
+        Cart::remove($id);
+
+        return response()->json(['success' => 'Course Removed from Cart']);
+
+    }
+    // End of Method
 }

@@ -165,7 +165,7 @@
                                     <li>
                                         <p class="shop-cart-btn d-flex align-items-center">
                                             <i class="la la-shopping-cart"></i>
-                                            <span class="product-count">2</span>
+                                            <span class="product-count" id="cartQty">0</span>
                                         </p>
                                         <ul class="cart-dropdown-menu">
                                             <div id="cart">

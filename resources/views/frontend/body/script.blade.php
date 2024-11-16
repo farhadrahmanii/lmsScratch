@@ -156,6 +156,7 @@
             },
             url: "/cart/data/store/" + courseId,
             success: function (data) {
+                cart(); // Refresh the cart
                 console.log("Success:", data);
                 // Start Message 
                 wishlist(); // Refresh the wishlist
@@ -164,7 +165,7 @@
                     position: 'top-end',
                     icon: 'success',
                     showConfirmButton: false,
-                    timer: 6000
+                    timer: 2000
                 })
                 if ($.isEmptyObject(data.error)) {
 
@@ -199,29 +200,63 @@
             url: "/course/mini/cart",
             success: function (response) {
                 $('span[id="cartSubTotal"]').text(response.cartTotal)
-                var rows = ""
+                $('#cartQty').text(response.cartQty)
+                var rows = "";
                 $.each(response.cart, function (key, value) {
-
-                    rows += `
-                    <li class="media media-card">
-                                                <a href="shopping-cart.html" class="media-img">
-                                                    <img src="/${value.options.image}"
-                                                        alt="Cart image">
-                                                </a>
-                                                <div class="media-body">
-                                                    <h5><a href="course-details.html">${value.name}</a></h5>
-                                                    <span class="py-1 d-block lh-18">Kamran Ahmed</span>
-                                        <p class="text-black font-weight-semi-bold lh-18">$${value.price}</p>
+                    rows += `<li class="media media-card">
+                                <a href="shopping-cart.html" class="media-img">
+                                    <img src="/${value.options.image}" alt="Cart image"></a>
+                                <div class="media-body">
+                                        <h5><a href="/course/details/${value.id}/${value.options.slug}">${value.name}</a></h5>
+                                        <span class="py-1 d-block lh-18">Kamran Ahmed</span>
+                                    <p class="text-black font-weight-semi-bold lh-18">$${value.price}</p>
+                                 <a type="submit" id="${value.rowId}" onclick="miniCartRemove(this.id)"><i class="la la-times"></i></a>
                                 </div>
-                             </li>
-`
-                });
+                            </li>`});
                 $('#cart').html(rows);
-
             }
 
         })
     }
+
     cart()
+    // Mini Cart Remove Start
+    function miniCartRemove(rowId) {
+        $.ajax({
+            type: 'GET',
+            dataType: 'json',
+            url: '/minicart/course/remove/' + rowId,
+            success: function (data) {
+                cart(); // Refresh the cart
+                // Start Message 
+                wishlist(); // Refresh the wishlist
+                const Toast = Swal.mixin({
+                    toast: true,
+                    position: 'top-end',
+                    icon: 'success',
+                    showConfirmButton: false,
+                    timer: 2000
+                })
+                if ($.isEmptyObject(data.error)) {
+
+                    Toast.fire({
+                        type: 'success',
+                        title: data.success,
+                    })
+
+                } else {
+
+                    Toast.fire({
+                        type: 'error',
+                        icon: 'error',
+                        title: data.error,
+                    })
+                }
+
+                // End Message 
+            }
+        })
+    }
+    // End Mini Cart Remove Start
 </script>
 <!-- // End Add to Cart Process -->

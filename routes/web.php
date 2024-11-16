@@ -152,3 +152,4 @@ Route::post('/cart/data/store/{id}', [CartController::class, 'addToCart'])->name
 Route::get('/cart/data', [CartController::class, 'CartData']);
 // get Data from mini cart
 Route::get('/course/mini/cart', [CartController::class, 'AddMiniCart']);
+Route::get('/minicart/course/remove/{id}', [CartController::class, 'RemoveMiniCart']);
