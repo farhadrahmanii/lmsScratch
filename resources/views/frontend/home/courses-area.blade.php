@@ -182,8 +182,11 @@
                             @endforeach
                         </ul>
                         <div class="d-flex justify-content-between align-items-center">
-                            <a href="#" class="mr-3 btn theme-btn flex-grow-1"><i
-                                    class="mr-1 la la-shopping-cart fs-18"></i> Add to Cart</a>
+                            <button type="submit"
+                                onclick="addToCart({{$courseItem->id}}, '{{$courseItem->course_name}}', '{{$courseItem->instructor_id}}', '{{$courseItem->course_name_slug}}')"
+                                class="mr-3 btn theme-btn flex-grow-1">
+                                Add to Cart
+                            </button>
                             <div class="shadow-sm cursor-pointer icon-element icon-element-sm" title="Add to Wishlist"><i
                                     class="la la-heart-o"></i></div>
                         </div>

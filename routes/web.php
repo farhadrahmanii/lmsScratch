@@ -4,6 +4,7 @@ use App\Http\Controllers\adminController;
 use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Backend\CourseController;
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\Frontend\CartController;
 use App\Http\Controllers\Frontend\IndexController;
 use App\Http\Controllers\Frontend\WishListController;
 use App\Http\Controllers\instructorController;
@@ -147,3 +148,7 @@ Route::get('/category/{id}/{slug}', [IndexController::class, 'CourseCategory']);
 Route::get('/subcategory/{id}/{slug}', [IndexController::class, 'CourseSubCategory']);
 Route::get('/instructor/{id}', [IndexController::class, 'InstructorDetails'])->name('instructor.details');
 Route::post('/add-to-wishlist/{course_id}', [WishListController::class, 'addToWishList']);
+Route::post('/cart/data/store/{id}', [CartController::class, 'addToCart'])->name('cart.store');
+Route::get('/cart/data', [CartController::class, 'CartData']);
+// get Data from mini cart
+Route::get('/course/mini/cart', [CartController::class, 'AddMiniCart']);
