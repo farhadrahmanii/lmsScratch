@@ -259,4 +259,84 @@
     }
     // End Mini Cart Remove Start
 </script>
+<script>
+    function getCart() {
+        $.ajax({
+            type: 'GET',
+            dataType: 'json', // Corrected data type declaration
+            url: '/get-cart-course',
+            success: function (response) {
+                console.log("Response:", response); // Log the response for debugging
+                $('#cartQty').text(response.cartTotal);
+                var rows = "";
+                $.each(response.cart, function (key, value) {
+                    rows += `<tr>
+                    <th scope="row">
+                        <div class="media media-card">
+                            <a href="course-details.html" class="media-img mr-0">
+                                <img src="/${value.options.image}" alt="Cart image">
+                            </a>
+                        </div>
+                    </th>
+                    <td>
+                        <a href="/course/details/${value.id}/${value.options.slug}" class="text-black font-weight-semi-bold">${value.name}</a>
+                    </td>
+                    <td>
+                        <ul class="generic-list-item font-weight-semi-bold">
+                            <li class="text-black lh-18">$${value.price}</li>
+                        </ul>
+                    </td>
+                    <td>
+                        <button type="submit" id="${value.rowId}" onclick="CartRemove(this.id)" class="icon-element icon-element-xs shadow-sm border-0"
+                            data-toggle="tooltip" data-placement="top" title="Remove Cart">
+                            <i class="la la-times"></i>
+                        </button>
+                    </td>
+                </tr>`;
+                });
+                $('#cartPage').html(rows);
+            },
+            error: function (xhr) {
+                console.error("AJAX Error:", xhr.responseText); // Log errors for debugging
+            }
+        });
+    }
+    getCart();
+    function CartRemove(id) {
+        $.ajax({
+            type: 'GET',
+            dataType: 'json',
+            url: '/removeCart/' + id,
+            success: function (data) {
+                getCart(); // Refresh the cart
+                // Start Message
+                wishlist(); // Refresh the wishlist
+                const Toast = Swal.mixin({
+                    toast: true,
+                    position: 'top-end',
+                    icon: 'success',
+                    showConfirmButton: false,
+                    timer: 2000
+                })
+                if ($.isEmptyObject(data.error)) {
+
+                    Toast.fire({
+                        type: 'success',
+                        title: data.success,
+                    })
+
+                } else {
+
+                    Toast.fire({
+                        type: 'error',
+                        icon: 'error',
+                        title: data.error,
+                    })
+                }
+
+                // End Message
+            }
+        })
+    }
+</script>
 <!-- // End Add to Cart Process -->

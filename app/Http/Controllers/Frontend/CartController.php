@@ -77,4 +77,30 @@ class CartController extends Controller
 
     }
     // End of Method
+    public function MyCart()
+    {
+        return view('frontend.mycart.view_mycart');
+    }
+    // End of Method
+    public function GetCartCourse()
+    {
+        $cart = Cart::content();
+        $cartTotal = Cart::total();
+        $cartQty = Cart::count();
+
+        return response()->json(array(
+            'cart' => $cart,
+            'cartTotal' => $cartTotal,
+            'cartQty' => $cartQty,
+        ));
+
+    }
+    // End of Method
+    public function RemoveCart($id)
+    {
+        Cart::remove($id);
+
+        return response()->json(['success' => 'Course Removed from Cart']);
+
+    }    // End of Method
 }
