@@ -267,7 +267,7 @@
             url: '/get-cart-course',
             success: function (response) {
                 console.log("Response:", response); // Log the response for debugging
-                $('#cartQty').text(response.cartTotal);
+                $('#cartSubTotal').text(response.cartTotal);
                 var rows = "";
                 $.each(response.cart, function (key, value) {
                     rows += `<tr>
@@ -309,6 +309,8 @@
             url: '/removeCart/' + id,
             success: function (data) {
                 getCart(); // Refresh the cart
+                cart()
+
                 // Start Message
                 wishlist(); // Refresh the wishlist
                 const Toast = Swal.mixin({
