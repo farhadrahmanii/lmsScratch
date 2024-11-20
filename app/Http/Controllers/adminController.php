@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\RedirectResponse;
-
+use App\Models\Course;
 class adminController extends Controller
 {
     public function AdminDashboard()
@@ -163,6 +163,25 @@ class adminController extends Controller
 
         return response()->json(['message' => 'User Status Updated Successfully']);
 
+    }
+    public function AllCourses(Request $request)
+    {
+        $course = Course::latest()->get();
+
+        return view('admin.backend.course.all_courses', compact('course'));
+    }
+    public function UpdateCourseStatus(Request $request)
+    {
+        $courseId = $request->input('course_id');
+        $status = $request->input('status', 0);
+
+        $course = Course::findOrFail($courseId);
+        if ($course) {
+            $course->status = $status;
+            $course->save();
+        }
+
+        return response()->json(['message' => 'Course Status Updated Successfully']);
     }
 
 }

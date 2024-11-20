@@ -77,6 +77,11 @@ Route::middleware(['auth', 'verified', 'admin'])->group(function () {
         Route::get('/instructor/create', 'CreateInstructor')->name('add.instructor');
     });
 
+    Route::controller(adminController::class)->group(function () {
+        Route::get('/admin/all/course', 'AllCourses')->name('admin.all.course');
+        Route::post('/update/course/status', 'UpdateCourseStatus')->name('update.course.status');
+    });
+
 
 });
 

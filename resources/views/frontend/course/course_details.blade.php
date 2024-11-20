@@ -4,16 +4,6 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
 <!-- ================================
     START BREADCRUMB AREA
 ================================= -->
@@ -694,7 +684,6 @@
                                             class="fs-35 font-weight-semi-bold text-black">${{ $course->discount_price }}</span>
                                         <span class="before-price mx-1">${{ $course->selling_price }}</span>
                                         <span class="price-discount">{{round($discount)}}% off</span>
-
                                     @endif
                                 </p>
                                 <p class="preview-price-discount-text pb-35px">

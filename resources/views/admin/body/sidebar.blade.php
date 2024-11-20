@@ -63,6 +63,18 @@
 
             </ul>
         </li>
+        <li>
+            <a href="javascript:;" class="has-arrow">
+                <div class="parent-icon"><i class='bx bx-bookmark-heart'></i>
+                </div>
+                <div class="menu-title">Manage Courses</div>
+            </a>
+            <ul>
+                <li> <a href="{{route('admin.all.course')}}"><i class='bx bx-radio-circle'></i>All instructor</a>
+                </li>
+
+            </ul>
+        </li>
 
 
 
