@@ -48,9 +48,9 @@
                                 </td>
                                 <td>
                                     @if ($item->validaty >= Carbon\Carbon::now()->format('Y-m-d'))
-                                        <span class="badge bg-success">Active</span>
+                                        <span class="badge bg-success">Valid</span>
                                     @else
-                                        <span class="badge bg-danger">Inactive</span>
+                                        <span class="badge bg-danger">Invalid</span>
                                     @endif
                                 </td>
                                 <td>

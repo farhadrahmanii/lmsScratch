@@ -43,7 +43,7 @@
                 </div>
                 <div class="form-group col-md-6">
                     <label for="image" class="form-label">coupon discount</label>
-                    <input type="text" value="{{ $coupon->coupon_discount }}"
+                    <input type="text" type="number" min="1" max="100" value="{{ $coupon->coupon_discount }}"
                         class="p-2 rounded-lg bordered form-control" id="image" name="coupon_discount"
                         placeholder="Amount of Discount">
                 </div>

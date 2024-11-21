@@ -42,8 +42,8 @@
                 </div>
                 <div class="form-group col-md-6">
                     <label for="image" class="form-label">coupon discount</label>
-                    <input type="number" min="1" max="5" class="p-2 rounded-lg bordered form-control" id="image" name="coupon_discount"
-                        placeholder="Amount of Discount">
+                    <input type="number" min="1" max="100" class="p-2 rounded-lg bordered form-control"
+                        name="coupon_discount" placeholder="Amount of Discount">
                 </div>
                 <div class="form-group col-md-6">
                     <label for="validaty" class="form-label">Coupon Validity</label>
