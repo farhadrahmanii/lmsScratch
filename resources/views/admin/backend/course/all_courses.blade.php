@@ -56,7 +56,7 @@
                                 <td>{{$item['category']['category_name']}}</td>
                                 <td>${{$item->selling_price}}</td>
                                 <td>
-                                   <a href="" class="btn btn-info"><i class="lni lni-eye"></i></a>
+                                   <a href="{{route('admin.course.detail', $item->id)}}" class="btn btn-info"><i class="lni lni-eye"></i></a>
                                 <td>
                                     <div class="form-check-success form-check form-switch">
                                         <input class="form-check-input status-toggle large-checkbox" type="checkbox"

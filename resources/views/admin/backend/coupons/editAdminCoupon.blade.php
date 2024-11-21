@@ -25,34 +25,38 @@
 
     <div class="card">
         <div class="p-4 card-body">
-            <h5 class="mb-4">Add Category</h5>
+            <h5 class="mb-4">Add Coupon</h5>
             <form class="row g-3" method="POST" id="myForm" enctype="multipart/form-data"
-                action="{{route('store.category')}}">
+                action="{{route('update.admin.coupon')}}">
                 @csrf
+                <input type="hidden" name="id" value="{{ $coupon->id }}">
                 <div class="form-group col-md-6">
-                    <label for="category_name" class="form-label">Category Name</label>
-                    <input type="text" id="input1" name="category_name" class="form-control rounded-lg
-                    @error('name')
+                    <label for="coupon_name" class="form-label">Coupon Name</label>
+                    <input type="text" id="input1" name="coupon_name" value="{{ $coupon->coupon_name }}" class="form-control rounded-lg
+                    @error('coupon_name')
                         in-valid
                     @enderror
-                    " id="name" placeholder="Data Science" required>
+                    " id="name" placeholder="Black_Friday" required>
                     @error('name')
                         <span class="text-red-500 text-bold">{{$message}}</span>
                     @enderror
                 </div>
                 <div class="form-group col-md-6">
-                    <label for="image" class="form-label">Category Image</label>
-                    <input type="file" class="p-2 rounded-lg bordered form-control" id="image" name="image"
-                        placeholder="First Name">
+                    <label for="image" class="form-label">coupon discount</label>
+                    <input type="text" value="{{ $coupon->coupon_discount }}"
+                        class="p-2 rounded-lg bordered form-control" id="image" name="coupon_discount"
+                        placeholder="Amount of Discount">
                 </div>
-                <div class="col-md-6">
-                    <img src="{{url('upload/default.png')}}" alt="category Image" id="showImage" class="rounded-circle"
-                        width="110">
+                <div class="form-group col-md-6">
+                    <label for="validaty" class="form-label">Coupon Validity</label>
+                    <input type="date" value="{{ $coupon->validaty }}"
+                        min="{{ \Carbon\Carbon::now()->format('Y-m-d') }}" class="p-2 rounded-lg bordered form-control"
+                        id="validaty" name="validaty">
                 </div>
                 <div class="col-md-12">
                     <div class="gap-3 d-md-flex d-grid align-items-center">
                         <button type="submit" class="px-4 btn btn-primary">Submit</button>
-                        <a href="{{route('all.category')}}" class="px-4 btn btn-light">Cancel</a>
+                        <a href="{{route('admin.all.coupon')}}" class="px-4 btn btn-light">Cancel</a>
                     </div>
                 </div>
             </form>
@@ -96,15 +100,10 @@
     });
 </script>
 <script>
-
-    $(document).ready(function () {
-        $('#image').change(function (e) {
-            var reader = new FileReader();
-            reader.onload = function (e) {
-                $('#showImage').attr('src', e.target.result);
-            }
-            reader.readAsDataURL(e.target.files['0']);
-        });
+    document.addEventListener('DOMContentLoaded', () => {
+        const dateInput = document.getElementById('validaty');
+        const today = new Date().toISOString().split('T')[0];
+        dateInput.setAttribute('min', today);
     });
 </script>
 @endsection
