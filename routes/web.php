@@ -90,7 +90,7 @@ Route::middleware(['auth', 'verified', 'admin'])->group(function () {
         Route::post('/admin/coupon/store', 'StoreAdminCoupon')->name('store.admin.coupon');
         Route::get('/admin/coupon/edit/{id}', 'EditAdminCoupon')->name('edit.admin.coupon');
         Route::post('/admin/coupon/update', 'UpdateAdminCoupon')->name('update.admin.coupon');
-        Route::get('/coupon/delete/{id}', 'DeleteCoupon')->name('delete.coupon');
+        Route::get('/admin/coupon/delete/{id}', 'DeleteAdminCoupon')->name('delete.admin.coupon');
     });
 
 

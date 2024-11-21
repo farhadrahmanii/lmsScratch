@@ -42,7 +42,7 @@
                             <tr>
                                 <td>{{ $key + 1 }}</td>
                                 <td>{{$item->coupon_name}}</td>
-                                <td>{{$item->coupon_discount}}</td>
+                                <td>{{$item->coupon_discount}}%</td>
                                 <td>
                                     {{ Carbon\Carbon::parse($item->validaty)->format('D, d F Y')}}
                                 </td>
@@ -55,7 +55,7 @@
                                 </td>
                                 <td>
                                     <a href="{{route('edit.admin.coupon', $item->id)}}" class="btn btn-info">Edit</a>
-                                    <a href="{{route('delete.category', $item->id)}}" class="btn btn-danger"
+                                    <a href="{{route('delete.admin.coupon', $item->id)}}" class="btn btn-danger"
                                         id="delete">Delete</a>
                                 </td>
                             </tr>
