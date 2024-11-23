@@ -35,13 +35,13 @@
                     @error('coupon_name')
                         in-valid
                     @enderror
-                    " id="name" placeholder="Black_Friday" required>
+                    " id="name" placeholder="Black_Friday">
                     @error('name')
                         <span class="text-red-500 text-bold">{{$message}}</span>
                     @enderror
                 </div>
                 <div class="form-group col-md-6">
-                    <label for="image" class="form-label">coupon discount</label>
+                    <label for="coupon_discount" class="form-label">coupon discount</label>
                     <input type="number" min="1" max="100" class="p-2 rounded-lg bordered form-control"
                         name="coupon_discount" placeholder="Amount of Discount">
                 </div>
@@ -64,24 +64,22 @@
     $(document).ready(function () {
         $('#myForm').validate({
             rules: {
-                category_name: {
+                coupon_name: {
                     required: true,
                 },
-                image: {
+                coupon_discount: {
                     required: true,
                 },
 
             },
             messages: {
-                category_name: {
+                coupon_name: {
                     required: 'Please Enter category name',
                 },
-                image: {
+                coupon_discount: {
                     required: 'Please Add Image',
                 },
-
-
-            },
+            }
             errorElement: 'span',
             errorPlacement: function (error, element) {
                 error.addClass('invalid-feedback');

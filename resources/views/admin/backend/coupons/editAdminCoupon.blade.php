@@ -6,18 +6,15 @@
 <div class="page-content">
     <!--breadcrumb-->
     <div class="mb-3 page-breadcrumb d-none d-sm-flex align-items-center">
-        <div class="breadcrumb-title pe-3">Tables</div>
+        <div class="breadcrumb-title pe-3">Coupon</div>
         <div class="ps-3">
             <nav aria-label="breadcrumb">
                 <ol class="p-0 mb-0 breadcrumb">
                     <li class="breadcrumb-item"><a href="javascript:;"><i class="bx bx-home-alt"></i></a>
                     </li>
-                    <li class="breadcrumb-item active" aria-current="page">Data Table</li>
+                    <li class="breadcrumb-item active" aria-current="page">Edit Coupon</li>
                 </ol>
             </nav>
-        </div>
-        <div class="ms-auto">
-            <a href="{{route('add.category')}}" class="px-5 btn btn-primary">Add Category</a>
         </div>
     </div>
     <!--end breadcrumb-->
@@ -36,7 +33,7 @@
                     @error('coupon_name')
                         in-valid
                     @enderror
-                    " id="name" placeholder="Black_Friday" required>
+                    " id="name" placeholder="Black_Friday">
                     @error('name')
                         <span class="text-red-500 text-bold">{{$message}}</span>
                     @enderror
@@ -67,19 +64,19 @@
     $(document).ready(function () {
         $('#myForm').validate({
             rules: {
-                category_name: {
+                coupon_name: {
                     required: true,
                 },
-                image: {
+                coupon_discount: {
                     required: true,
                 },
 
             },
             messages: {
-                category_name: {
+                coupon_name: {
                     required: 'Please Enter category name',
                 },
-                image: {
+                coupon_discount: {
                     required: 'Please Add Image',
                 },
 
