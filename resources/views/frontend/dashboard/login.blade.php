@@ -1,5 +1,6 @@
 @extends('frontend.master')
 @section('home')
+
 <!-- ================================
     START BREADCRUMB AREA
 ================================= -->

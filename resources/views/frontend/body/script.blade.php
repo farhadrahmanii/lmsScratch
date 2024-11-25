@@ -310,7 +310,7 @@
             success: function (data) {
                 getCart(); // Refresh the cart
                 cart()
-
+                couponCalculation(); // Refresh the cart
                 // Start Message
                 wishlist(); // Refresh the wishlist
                 const Toast = Swal.mixin({
@@ -349,11 +349,100 @@
         $.ajax({
             type: "POST",
             dataType: 'json',
-            data: { coupon_name: coupon_name },
             url: "/coupon-apply",
+            data: {
+                coupon_name: coupon_name,
+            },
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
             success: function (data) {
-                // Start Message
-                wishlist(); // Refresh the wishlist
+                couponCalculation()
+                if (data.validaty == true) {
+                    $('#CouponField').hide();
+                }
+                const Toast = Swal.mixin({
+                    toast: true,
+                    position: 'top-end',
+                    icon: 'success',
+                    showConfirmButton: false,
+                    timer: 2000
+                });
+                if (data.success) {
+                    Toast.fire({
+                        icon: 'success',
+                        title: data.success
+                    });
+                } else {
+                    Toast.fire({
+                        icon: 'error',
+                        title: data.error
+                    });
+                }
+            },
+            error: function (xhr, status, error) {
+                console.error('Error:', error);
+            }
+        });
+    }
+
+
+    // Coupon Calculation
+    function couponCalculation() {
+        $.ajax({
+            type: 'GET',
+            url: "/coupon-calculation",
+            dataType: 'json',
+
+            success: function (data) {
+                if (data.total) {
+                    $('#couponCalField').html(`
+                    <h3 class="fs-18 font-weight-bold pb-3">Cart Totals</h3>
+                <div class="divider"><span></span></div>
+                <ul class="generic-list-item pb-4">
+                    <li class="d-flex align-items-center justify-content-between font-weight-semi-bold">
+                        <span class="text-black">Subtotal:</span><span > $${data.total}</span>
+                    </li>
+                    <li class="d-flex align-items-center justify-content-between font-weight-semi-bold">
+                        <span class="text-black">Total:</span><span >$${data.total} </span>
+                    </li>
+                </ul>`);
+                } else {
+                    $('#couponCalField').html(`
+                    <h3 class="fs-18 font-weight-bold pb-3">Cart Totals</h3>
+                <div class="divider"><span></span></div>
+                <ul class="generic-list-item pb-4">
+                    <li class="d-flex align-items-center justify-content-between font-weight-semi-bold">
+                        <span class="text-black">Subtotal:</span><span > $${data.subtotal}</span>
+                    </li>
+                    <li class="d-flex align-items-center justify-content-between font-weight-semi-bold">
+                        <span class="text-black">Coupon Name:</span><span > ${data.coupon_name} <button type="submit" onclick="CouponRemove(this.id)" class="icon-element icon-element-xs shadow-sm border-0" data-toggle="tooltip" data-placement="top" title="" data-original-title="Remove Cart">
+                            <i class="la la-times"></i>
+                        </button></span>
+                    </li>
+                    <li class="d-flex align-items-center justify-content-between font-weight-semi-bold">
+                        <span class="text-black">Coupon Discount:</span><span >$${data.discount_amount} </span>
+                    </li>
+                    <li class="d-flex align-items-center justify-content-between font-weight-semi-bold">
+                        <span class="text-black">Grand Total:</span><span >$${data.total_amount} </span>
+                    </li>
+                </ul>`)
+                }
+            }
+        })
+    }
+    couponCalculation()
+</script>
+<script>
+    function CouponRemove() {
+        $.ajax({
+            type: 'GET',
+            dataType: 'json',
+            url: '/coupon-remove',
+            success: function (data) {
+                couponCalculation(); // Refresh the cart
+                $('#CouponField').show();
+                cart()
                 const Toast = Swal.mixin({
                     toast: true,
                     position: 'top-end',
@@ -382,5 +471,4 @@
         })
     }
 </script>
-
 <!-- End ApplyCoupon -->
