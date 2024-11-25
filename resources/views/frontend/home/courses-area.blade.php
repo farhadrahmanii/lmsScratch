@@ -62,7 +62,7 @@
                                                         <div class="card-body">
                                                             <h6 class="mb-3 ribbon ribbon-blue-bg fs-14">{{$courseItem->label}}</h6>
                                                             <h5 class="card-title"><a
-                                                                    href="course-details.html">{{$courseItem->course_name}}</a>
+                                                                    href="{{url('/course/details/' . $courseItem->id . '/' . $courseItem->course_name_slug)}}">{{$courseItem->course_name}}</a>
                                                             </h5>
                                                             <p class="card-text"><a
                                                                     href="{{ route('instructor.details', $courseItem->instructor_id) }}">{{ $courseItem['user']['name']}}</a>

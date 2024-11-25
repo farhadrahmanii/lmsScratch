@@ -342,3 +342,45 @@
     }
 </script>
 <!-- // End Add to Cart Process -->
+<!-- ApplyCoupon -->
+<script>
+    function applyCoupon() {
+        var coupon_name = $('#coupon_name').val();
+        $.ajax({
+            type: "POST",
+            dataType: 'json',
+            data: { coupon_name: coupon_name },
+            url: "/coupon-apply",
+            success: function (data) {
+                // Start Message
+                wishlist(); // Refresh the wishlist
+                const Toast = Swal.mixin({
+                    toast: true,
+                    position: 'top-end',
+                    icon: 'success',
+                    showConfirmButton: false,
+                    timer: 2000
+                })
+                if ($.isEmptyObject(data.error)) {
+
+                    Toast.fire({
+                        type: 'success',
+                        title: data.success,
+                    })
+
+                } else {
+
+                    Toast.fire({
+                        type: 'error',
+                        icon: 'error',
+                        title: data.error,
+                    })
+                }
+
+                // End Message
+            }
+        })
+    }
+</script>
+
+<!-- End ApplyCoupon -->

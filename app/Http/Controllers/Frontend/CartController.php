@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
-use App\Models\Course;
+use App\Models\Coupon;
 
+use App\Models\Course;
+use Carbon\Carbon;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Http\Request;
 
@@ -99,6 +101,22 @@ class CartController extends Controller
     public function RemoveCart($id)
     {
         Cart::remove($id);
+
+        return response()->json(['success' => 'Course Removed from Cart']);
+
+    }    // End of Method
+    public function CouponApply(Request $request)
+    {
+        $coupon = Coupon::where('coupon_name', $request->coupon_name)->where('validaty', '>=', Carbon::now('Y-m-d'))->first();
+        if ($coupon) {
+            session()->put('coupon', [
+                'name' => $coupon->coupon_name,
+                'discount' => $coupon->discount,
+            ]);
+            return response()->json(['success' => 'Coupon Applied']);
+        } else {
+            return response()->json(['error' => 'Invalid Coupon']);
+        }
 
         return response()->json(['success' => 'Course Removed from Cart']);
 

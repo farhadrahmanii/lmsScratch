@@ -185,3 +185,6 @@ Route::controller(CartController::class)->group(function () {
     Route::get('/get-cart-course', 'GetCartCourse');
     Route::get('/removeCart/{id}', 'RemoveCart');
 });
+// Coupon Apply
+Route::post('/coupon-apply', [CartController::class, 'CouponApply']);
+

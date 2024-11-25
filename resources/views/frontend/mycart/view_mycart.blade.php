@@ -45,12 +45,13 @@
                 </tbody>
             </table>
             <div class="d-flex flex-wrap align-items-center justify-content-between pt-4">
-                <form method="post">
+                <form action="#">
+                    @csrf
                     <div class="input-group mb-2">
-                        <input class="form-control form--control pl-3" type="text" name="search"
+                        <input class="form-control form--control pl-3" type="text" id="coupon_name" name="coupon_name"
                             placeholder="Coupon code">
                         <div class="input-group-append">
-                            <button class="btn theme-btn">Apply Code</button>
+                            <a type="submit" onclick="applyCoupon()" class="btn theme-btn">Apply Code</a>
                         </div>
                     </div>
                 </form>
