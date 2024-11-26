@@ -36,7 +36,8 @@
                     <div class="card-body">
                         <h3 class="card-title fs-22 pb-3">Billing Details</h3>
                         <div class="divider"><span></span></div>
-                        <form method="post" class="row">
+                        <form method="post" class="row" action="{{route('payment')}}" enctype="multipart/form-data">
+                            @csrf
                             <div class="input-box col-lg-6">
                                 <label class="label-text">First Name</label>
                                 <div class="form-group">
@@ -148,6 +149,7 @@
                                     <span>${{ session()->get('coupon')['total_amount'] }}</span>
                                 </li>
                             </ul>
+                            <input type="hidden" name="total" value="{{$cartTotal}}" />
                         @else
                             <h3 class="card-title fs-22 pb-3">Order Summary</h3>
                             <div class="divider"><span></span></div>
@@ -161,6 +163,7 @@
                                     <span>${{ $cartTotal }}</span>
                                 </li>
                             </ul>
+                            <input type="text" name="total" value="{{$cartTotal}}" />
                         @endif
                         <div class="btn-box border-top border-top-gray pt-3">
                             <p class="fs-14 lh-22 mb-2">Aduca is required by law to collect applicable transaction taxes
