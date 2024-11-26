@@ -73,7 +73,7 @@
                     <div class="col-lg-2">
                         <div class="logo-box">
                             <a href="{{route('home')}}" class="logo"><img src="{{asset('frontend/images/logo.png')}}"
-                                    alt="logo"></a>
+                                    alt="logo" height="50px" width="100%"></a>
                             <div class="user-btn-action">
                                 <div class="mr-2 shadow-sm search-menu-toggle icon-element icon-element-sm"
                                     data-toggle="tooltip" data-placement="top" title="Search">

@@ -41,7 +41,7 @@ class CartController extends Controller
             'options' => [
                 'image' => $course->course_image,
                 'slug' => $course->course_name_slug,
-                'instructor' => $course->instructor,
+                'instructor' => $course->instructor_id,
             ]
         ]);
 
@@ -131,7 +131,7 @@ class CartController extends Controller
         if ($coupon) {
             session()->put('coupon', [
                 'coupon_name' => $coupon->coupon_name,
-                'coupon_discount' => $coupon->discount,
+                'coupon_discount' => $coupon->coupon_discount,
                 'discount_amount' => round(Cart::total() *
                     $coupon->coupon_discount / 100),
                 'total_amount' => Cart::total() - round(Cart::total() *
@@ -172,9 +172,9 @@ class CartController extends Controller
         if (Auth::check()) {
             if (Cart::total() > 0) {
                 $content = Cart::content();
-                $cartQty = Cart::total();
+                $cartTotal = Cart::total();
                 $cartCount = Cart::count();
-                return view('frontend.checkout.view_checkout', compact('content', 'cartQty', 'cartCount'));
+                return view('frontend.checkout.view_checkout', compact('content', 'cartTotal', 'cartCount'));
             } else {
                 $notification = array(
                     'message' => 'Cart is Empty',
@@ -184,7 +184,8 @@ class CartController extends Controller
             }
         } else {
             $notification = array(
-
+                'message' => 'Please Login First',
+                'alert-type' => 'error'
             );
             return redirect()->to('/login')->with($notification);
         }

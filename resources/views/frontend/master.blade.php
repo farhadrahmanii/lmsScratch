@@ -9,6 +9,7 @@
 
     <title></title>
 
+
     <!-- Google fonts -->
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800&display=swap"
@@ -30,6 +31,9 @@
     <link rel="stylesheet" href="{{asset('frontend/css/plyr.css')}}">
     <link rel="stylesheet" href="{{asset('frontend/css/style.css')}}">
     <!-- end inject -->
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+
 </head>
 
 <body>
@@ -87,10 +91,38 @@
     <script src="{{asset('frontend/js/plyr.js')}}"></script>
     <script src="{{asset('frontend/js/jquery.lazy.min.js')}}"></script>
     <script src="{{asset('frontend/js/main.js')}}"></script>
+
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+
+
+    <script>
+        @if(Session::has('message'))
+            var type = "{{ Session::get('alert-type', 'info') }}"
+            switch (type) {
+                case 'info':
+                    toastr.info(" {{ Session::get('message') }} ");
+                    break;
+
+                case 'success':
+                    toastr.success(" {{ Session::get('message') }} ");
+                    break;
+
+                case 'warning':
+                    toastr.warning(" {{ Session::get('message') }} ");
+                    break;
+
+                case 'error':
+                    toastr.error(" {{ Session::get('message') }} ");
+                    break;
+            }
+        @endif 
+    </script>
+
     <script>
         var player = new Plyr('#player');
     </script>
-
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
     @include('frontend.body.script')
 

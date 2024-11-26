@@ -4,7 +4,8 @@
             <div class="col-lg-3 responsive-column-half">
                 <div class="footer-item">
                     <a href="index.html">
-                        <img src="images/logo.png" alt="footer logo" class="footer__logo">
+                        <img src="{{asset('frontend/images/logo.png')}}" height="70px" alt="footer logo"
+                            class="footer__logo">
                     </a>
                     <ul class="pt-4 generic-list-item">
                         <li><a href="tel:+1631237884">+163 123 7884</a></li>
@@ -54,10 +55,10 @@
                     <span class="section-divider section--divider"></span>
                     <div class="mobile-app">
                         <p class="pb-3 lh-24">Download our mobile app and learn on the go.</p>
-                        <a href="#" class="mb-2 d-block hover-s"><img src="images/appstore.png" alt="App store"
-                                class="img-fluid"></a>
-                        <a href="#" class="d-block hover-s"><img src="images/googleplay.png" alt="Google play store"
-                                class="img-fluid"></a>
+                        <a href="#" class="mb-2 d-block hover-s"><img src="{{asset('frontend/images/appstore.png')}}"
+                                alt="App store" class="img-fluid"></a>
+                        <a href="#" class="d-block hover-s"><img src="{{asset('frontend/images/googleplay.png')}}"
+                                alt="Google play store" class="img-fluid"></a>
                     </div>
                 </div><!-- end footer-item -->
             </div><!-- end col-lg-3 -->
@@ -68,8 +69,8 @@
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-lg-6">
-                    <p class="copy-desc">&copy; 2021 Aduca. All Rights Reserved. by <a
-                            href="https://techydevs.com/">TechyDevs</a></p>
+                    <p class="copy-desc">&copy; 2024 Edukit. All Rights Reserved. by <a href="https://farhad.in">Farhad
+                            Rahmani</a></p>
                 </div><!-- end col-lg-6 -->
                 <div class="col-lg-6">
                     <div class="flex-wrap d-flex align-items-center justify-content-end">
