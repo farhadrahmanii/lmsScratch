@@ -163,7 +163,7 @@
                                     <span>${{ $cartTotal }}</span>
                                 </li>
                             </ul>
-                            <input type="text" name="total" value="{{$cartTotal}}" />
+                            <input type="hidden" name="total" value="{{$cartTotal}}" />
                         @endif
                         <div class="btn-box border-top border-top-gray pt-3">
                             <p class="fs-14 lh-22 mb-2">Aduca is required by law to collect applicable transaction taxes

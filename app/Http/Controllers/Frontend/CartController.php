@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
+use App\Mail\Orderconfirm;
 use App\Models\Coupon;
 
 use App\Models\Course;
@@ -12,6 +13,7 @@ use Auth;
 use Carbon\Carbon;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Session;
 
 class CartController extends Controller
@@ -237,7 +239,24 @@ class CartController extends Controller
             $order->price = $request->price[$key];
             $order->save();
         } //End Foreach
+
         $request->session()->forget('cart');
+
+
+        $paymentid = $data->id;
+        // 
+        $sendMail = Payment::findOrFail($paymentid);
+        $data = [
+            'invoice_no' => $sendMail->invoice_no,
+            'amount' => $total_amount,
+            'name' => $sendMail->name,
+            'email' => $sendMail->email,
+            'address' => $sendMail->address,
+            'phone' => $sendMail->phone,
+        ];
+        Mail::to($request->email)->send(new Orderconfirm($data));
+
+        // 
         if ($request->cash_delivery == 'strip') {
             echo 'Stripe Payment';
         } else {
