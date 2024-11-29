@@ -4,6 +4,7 @@ use App\Http\Controllers\adminController;
 use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Backend\CouponController;
 use App\Http\Controllers\Backend\CourseController;
+use App\Http\Controllers\Backend\SettingController;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\Frontend\CartController;
 use App\Http\Controllers\Frontend\IndexController;
@@ -94,7 +95,14 @@ Route::middleware(['auth', 'verified', 'admin'])->group(function () {
     });
 
 
-});
+    // category all Routes
+    Route::controller(SettingController::class)->group(function () {
+        Route::get('/smtp/setting', 'SmtpSetting')->name('smtp.setting');
+        Route::post('/smtp/update', 'SmtpUpdate')->name('update.smtp');
+    });
+
+
+}); //End Admin Routes
 
 
 
@@ -175,6 +183,7 @@ Route::get('/subcategory/{id}/{slug}', [IndexController::class, 'CourseSubCatego
 Route::get('/instructor/{id}', [IndexController::class, 'InstructorDetails'])->name('instructor.details');
 Route::post('/add-to-wishlist/{course_id}', [WishListController::class, 'addToWishList']);
 Route::post('/cart/data/store/{id}', [CartController::class, 'addToCart'])->name('cart.store');
+Route::post('/buy/this/course/{id}', [CartController::class, 'buyThisCourseNow']);
 Route::get('/cart/data', [CartController::class, 'CartData']);
 // get Data from mini cart
 Route::get('/course/mini/cart', [CartController::class, 'AddMiniCart']);

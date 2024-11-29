@@ -210,6 +210,7 @@ class CartController extends Controller
         $data->address = $request->address;
         $data->cash_delivery = $request->cash_delivery;
         $data->payment_type = 'Direct Payment';
+        $data->total_amount = $total_amount;
 
         $data->invoice_no = 'EOS' . mt_rand(10000000, 99999999);
         $data->order_date = Carbon::now()->format('d F Y');
@@ -269,4 +270,36 @@ class CartController extends Controller
         }
 
     }    // End of Method
+
+    public function buyThisCourseNow(Request $request, $id)
+    {
+        $course = Course::findOrFail($id);
+
+        // Check if the course is already in the cart
+        $CartItem = Cart::search(function ($cartItem, $rowId) use ($id) {
+            return $cartItem->id == $id;
+        });
+
+        if ($CartItem->isNotEmpty()) {
+            return response()->json(['error' => 'The Course is already in your Cart']);
+        }
+
+        $price = $course->discount_price ?? $course->selling_price;
+
+        Cart::add([
+            'id' => $id,
+            'name' => $request->course_name,
+            'qty' => 1,
+            'price' => $price,
+            'weight' => 1,
+            'options' => [
+                'image' => $course->course_image,
+                'slug' => $course->course_name_slug,
+                'instructor' => $course->instructor_id,
+            ]
+        ]);
+
+        return response()->json(['success' => 'Added To Cart']);
+    }
+    // End of Method
 }

@@ -192,6 +192,62 @@
     }
 
 </script>
+
+<!--  Start Buy this course Process -->
+<script>
+    function buyThisCourse(courseId, courseName, instrcutorId, slug) {
+        $.ajax({
+            type: "POST",
+            dataType: 'json',
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            data: {
+                course_name: courseName,
+                course_name_slug: slug,
+                instructor: instrcutorId,
+            },
+            url: "/buy/this/course/" + courseId,
+            success: function (data) {
+                cart(); // Refresh the cart
+                console.log("Success:", data);
+                // Start Message 
+                wishlist(); // Refresh the wishlist
+                const Toast = Swal.mixin({
+                    toast: true,
+                    position: 'top-end',
+                    icon: 'success',
+                    showConfirmButton: false,
+                    timer: 2000
+                })
+                if ($.isEmptyObject(data.error)) {
+
+                    Toast.fire({
+                        type: 'success',
+                        title: data.success,
+                    })
+
+                    window.location.href = '/checkout';
+
+                } else {
+
+                    Toast.fire({
+                        type: 'error',
+                        icon: 'error',
+                        title: data.error,
+                    })
+                }
+
+                // End Message 
+            },
+            error: function (xhr) {
+                console.error("Error:", xhr.responseJSON);
+            }
+        });
+    }
+
+</script>
+<!-- end Buy this course -->
 <script>
     function cart() {
         $.ajax({

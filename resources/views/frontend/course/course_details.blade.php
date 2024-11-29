@@ -159,7 +159,7 @@
                                         <div class="card-header" id="heading{{$sectionItem->id}}">
                                             <button class="btn btn-link d-flex align-items-center justify-content-between"
                                                 data-toggle="collapse" data-target="#collapse{{$sectionItem->id}}"
-                                                aria-expanded="true" aria-controls="collapse{{$sectionItem->id}}">
+                                                aria-expanded="false" aria-controls="collapse{{$sectionItem->id}}">
                                                 <i class="la la-plus"></i>
                                                 <i class="la la-minus"></i>
                                                 {{ $sectionItem->section_title }}
@@ -694,7 +694,9 @@
                                         onclick="addToCart({{$course->id}}, '{{$course->course_name}}', '{{$course->instructor_id}}', '{{$course->course_name_slug}}')"
                                         class="btn theme-btn w-100 mb-2"><i class="la la-shopping-cart fs-18 mr-1"></i>
                                         Add to cart</button>
-                                    <button type="button" class="btn theme-btn w-100 theme-btn-white mb-2"><i
+                                    <button type="button"
+                                        onclick="buyThisCourse({{$course->id}}, '{{$course->course_name}}', '{{$course->instructor_id}}', '{{$course->course_name_slug}}')"
+                                        class="btn theme-btn w-100 theme-btn-white mb-2"><i
                                             class="la la-shopping-bag mr-1"></i> Buy this course</button>
                                 </div>
                                 <p class="fs-14 text-center pb-4">30-Day Money-Back Guarantee</p>
