@@ -99,6 +99,21 @@
 
             </ul>
         </li>
+        <li>
+            <a href="javascript:;" class="has-arrow">
+                <div class="parent-icon"><i class='bx bx-bookmark-heart'></i>
+                </div>
+                <div class="menu-title">Orders</div>
+            </a>
+            <ul>
+                <li> <a href="{{route('admin.pending.order')}}"><i class='bx bx-radio-circle'></i>Pending Orders</a>
+                </li>
+                <li> <a href="{{route('admin-confirm-order-list')}}"><i class='bx bx-radio-circle'></i>Confirm
+                        Orders</a>
+                </li>
+
+            </ul>
+        </li>
 
 
 

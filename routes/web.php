@@ -5,15 +5,12 @@ use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Backend\CouponController;
 use App\Http\Controllers\Backend\CourseController;
 use App\Http\Controllers\Backend\SettingController;
-use App\Http\Controllers\Controller;
 use App\Http\Controllers\Frontend\CartController;
 use App\Http\Controllers\Frontend\IndexController;
 use App\Http\Controllers\Frontend\WishListController;
 use App\Http\Controllers\instructorController;
-use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\userController;
-use App\Http\Middleware\instructor;
-use App\Http\Middleware\Role;
 use Illuminate\Support\Facades\Route;
 
 
@@ -95,17 +92,22 @@ Route::middleware(['auth', 'verified', 'admin'])->group(function () {
     });
 
 
-    // category all Routes
+    // SMTP Setting all Routes
     Route::controller(SettingController::class)->group(function () {
         Route::get('/smtp/setting', 'SmtpSetting')->name('smtp.setting');
         Route::post('/smtp/update', 'SmtpUpdate')->name('update.smtp');
     });
 
+    // Orders all Routes
+    Route::controller(OrderController::class)->group(function () {
+        Route::get('/admin/pending/orders', 'PendingOrders')->name('admin.pending.order');
+        Route::get('/confirm-order/{id}', 'PendingToConfirm')->name('admin-confirm-order');
+        Route::get('/admin/order/details/{id}', 'AdminOrderDetials')->name('admin.order.detail');
+        Route::get('/admin/confirm-order/list', 'AdminConfirmOrderList')->name('admin-confirm-order-list');
+    });
+
 
 }); //End Admin Routes
-
-
-
 
 
 
@@ -202,4 +204,3 @@ Route::get('/coupon-remove', [CartController::class, 'CouponRemove']);
 // Checkout All Related Routes
 Route::get('/checkout', [CartController::class, 'CheckoutCreate'])->name('checkout');
 Route::post('/payment', [CartController::class, 'Payment'])->name('payment');
-
