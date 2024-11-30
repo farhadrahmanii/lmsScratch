@@ -61,6 +61,23 @@
                     </li>
                 </ul>
             </li>
+
+            <li>
+                <a href="javascript:;" class="has-arrow">
+                    <div class="parent-icon"><i class='bx bx-cart'></i>
+                    </div>
+                    <div class="menu-title">Orders</div>
+                </a>
+                <ul>
+                    <li>
+                        <a href="{{ route('instructor.pending.order') }}"><i class='bx bx-radio-circle'></i>Pending
+                            Orders</a>
+                    </li>
+                    <li> <a href="ecommerce-products-details.html"><i class='bx bx-radio-circle'></i>Confirmed Orders</a>
+                    </li>
+                </ul>
+            </li>
+
             <li>
                 <a class="has-arrow" href="javascript:;">
                     <div class="parent-icon"><i class='bx bx-bookmark-heart'></i>

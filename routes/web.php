@@ -98,7 +98,7 @@ Route::middleware(['auth', 'verified', 'admin'])->group(function () {
         Route::post('/smtp/update', 'SmtpUpdate')->name('update.smtp');
     });
 
-    // Orders all Routes
+    // all Admin Orders Routes
     Route::controller(OrderController::class)->group(function () {
         Route::get('/admin/pending/orders', 'PendingOrders')->name('admin.pending.order');
         Route::get('/confirm-order/{id}', 'PendingToConfirm')->name('admin-confirm-order');
@@ -166,6 +166,11 @@ Route::middleware(['auth', 'verified', 'instructor'])->group(function () {
         Route::get('/edit/course/{course}', 'EditCourse')->name('edit.course');
         Route::post('/update/course', 'UpdateCourse')->name('update.course');
         Route::get('/delete/course/{id}', 'Destory')->name('delete.course');
+    });
+
+    // Orders all Routes
+    Route::controller(OrderController::class)->group(function () {
+        Route::get('/instructor/pending/orders', 'InstructorPendingOrders')->name('instructor.pending.order');
     });
 
 }); // End of Instructor Dashboard

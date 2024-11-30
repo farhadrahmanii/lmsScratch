@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Payment;
 use Illuminate\Http\Request;
 use App\Models\Order;
+use illuminate\Support\Facades\Auth;
 class OrderController extends Controller
 {
     public function PendingOrders()
@@ -35,6 +36,14 @@ class OrderController extends Controller
         $payment = Payment::where('status', 'confirm')->orderBy('id', 'DESC')->get();
 
         return view('admin.backend.order.confirmOrder', compact('payment'));
+
+    } //End of Mehtod
+    public function InstructorPendingOrders()
+    {
+        $user = Auth::user()->id;
+        $orders = Order::where('instructor_id', $user)->orderBy('id', 'DESC')->get();
+
+        return view('instructor.instructor_order.pendingOrder', compact('orders'));
 
     } //End of Mehtod
 }
