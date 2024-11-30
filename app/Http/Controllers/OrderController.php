@@ -46,4 +46,13 @@ class OrderController extends Controller
         return view('instructor.instructor_order.pendingOrder', compact('orders'));
 
     } //End of Mehtod
+    public function InstructorOrderDetails($id)
+    {
+        $payment = Payment::where('id', $id)->first();
+        $orderItem = Order::where('payment_id', $id)->orderBy('id', 'DESC')->get();
+
+        return view('instructor.instructor_order.orderDetail', compact('orderItem', 'payment'));
+    } //End of Mehtod
+
+
 }

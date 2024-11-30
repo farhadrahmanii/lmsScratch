@@ -59,7 +59,8 @@
                                                 @endif
                                             </td>
                                             <td>
-                                                <a href="#" class="btn btn-info"><i class="lni lni-eye"></i></a>
+                                                <a href="{{ route('instructor.order.detail', $item->payment->id)}}"
+                                                    class="btn btn-info"><i class="lni lni-eye"></i></a>
                                                 <a href="#" class="btn btn-danger"><i class="lni lni-download"></i></a>
                                             </td>
                                         </tr>
