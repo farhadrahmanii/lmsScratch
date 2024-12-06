@@ -27,7 +27,7 @@ class admin
         }
 
         if ($role == 'instructor') {
-            return redirect()->route('instructor');
+           return redirect()->route('instructor');
         }
 
         if ($role == 'user') {

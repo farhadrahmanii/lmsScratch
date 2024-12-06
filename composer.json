@@ -13,7 +13,8 @@
         "laravel/tinker": "^2.9",
         "laravel/vapor-cli": "^1.65",
         "laravel/vapor-core": "^2.37",
-        "livewire/livewire": "^3.5"
+        "livewire/livewire": "^3.5",
+        "spatie/laravel-permission": "*"
     },
     "require-dev": {
         "fakerphp/faker": "^1.23",
