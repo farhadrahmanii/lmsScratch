@@ -51,7 +51,7 @@
 
 
                 <hr>
-                @foreach ($permission_group as $group)
+                @foreach ($permission_group as $index=> $group)
                                 <div class="row">
                                     <div class="col-3">
 
@@ -59,8 +59,9 @@
                                             $permissions = App\Models\User::getPermissionByGroupName($group->group_name)
                                         @endphp
                                         <div class="form-check form-check-success">
-                                            <input class="form-check-input" type="checkbox" value="" id="flexCheckSuccess" {{ App\Models\User::roleHasPermissions($role, $permissions) ? 'checked' : ''}}>
-                                            <label class="form-check-label" for="flexCheckSuccess">
+                                            <input class="form-check-input" type="checkbox" value="" id="{{$index}}"
+                                                {{ App\Models\User::roleHasPermissions($role, $permissions) ? 'checked' : ''}}>
+                                            <label class="form-check-label" for="{{$index}}">
                                                 {{ $group->group_name}}
                                             </label>
                                         </div>
@@ -86,7 +87,7 @@
                 <div class="col-md-12">
                     <div class="gap-3 d-md-flex d-grid align-items-center">
                         <button type="submit" class="px-4 btn btn-primary">Submit</button>
-                        <a href="{{route('all.subcategory')}}" class="px-4 btn btn-light">Cancel</a>
+                        <a href="{{route('all.roles.permission')}}" class="px-4 btn btn-light">Cancel</a>
                     </div>
                 </div>
             </form>

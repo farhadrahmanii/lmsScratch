@@ -141,7 +141,7 @@ class RoleController extends Controller
 
 
         $notification = array(
-            'message' => ' Role Permission Created Successfully Successfully',
+            'message' => ' Role Permission Created Successfully',
             'alert-type' => 'success'
         );
         return redirect()->route('all.roles')->with($notification);
@@ -163,9 +163,20 @@ class RoleController extends Controller
     public function AdminUpdateRolePermission(Request $request, $id)
     {
         $role = Role::findOrFail($id);
-        $permissions = Permission::all();
-        $permission_group = User::getpermissionGroups();
-        return view('admin.backend.pages.rolesetup.edit_roles_permission', compact('permissions', 'role', 'permission_group'));
-    } // End of method
+
+        // Fetch permissions by their IDs and extract names
+        $permissions = $request->permission;
+        if (!empty($permissions)) {
+            $permissionNames = Permission::whereIn('id', $permissions)->pluck('name')->toArray();
+            $role->syncPermissions($permissionNames); // Sync with permission names
+        }
+
+        $notification = array(
+            'message' => 'Role Permission Updated Successfully',
+            'alert-type' => 'success'
+        );
+
+        return redirect()->route('all.roles.permission')->with($notification);
+    }    // End of method
 
 }
