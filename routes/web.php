@@ -4,6 +4,7 @@ use App\Http\Controllers\adminController;
 use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Backend\CouponController;
 use App\Http\Controllers\Backend\CourseController;
+use App\Http\Controllers\Backend\RoleController;
 use App\Http\Controllers\Backend\SettingController;
 use App\Http\Controllers\Frontend\CartController;
 use App\Http\Controllers\Frontend\IndexController;
@@ -104,6 +105,36 @@ Route::middleware(['auth', 'verified', 'admin'])->group(function () {
         Route::get('/confirm-order/{id}', 'PendingToConfirm')->name('admin-confirm-order');
         Route::get('/admin/order/details/{id}', 'AdminOrderDetials')->name('admin.order.detail');
         Route::get('/admin/confirm-order/list', 'AdminConfirmOrderList')->name('admin-confirm-order-list');
+    });
+    // Permission All Route
+    Route::controller(RoleController::class)->group(function () {
+        Route::get('/all/permission', 'AllPermission')->name('all.permission');
+        Route::get('/add/permission', 'AddPermission')->name('add.permission');
+        Route::post('/store/permission', 'StorePermission')->name('store.permission');
+        Route::get('/edit/permission/{id}', 'EditPermission')->name('edit.permission');
+        Route::post('/update/permission', 'UpdatePermission')->name('update.permission');
+        Route::get('/delete/permission/{id}', 'DeletePermission')->name('delete.permission');
+
+    });
+    // Role Controller 
+    Route::controller(RoleController::class)->group(function () {
+        Route::get('/all/roles', 'AllRoles')->name('all.roles');
+        Route::get('/add/role', 'AddRole')->name('add.role');
+        Route::post('/store/role', 'StoreRole')->name('store.role');
+        Route::get('/edit/role/{id}', 'EditRole')->name('edit.role');
+        Route::post('/update/role', 'UpdateRole')->name('update.role');
+        Route::get('/delete/role/{id}', 'DeleteRole')->name('delete.role');
+
+
+
+
+
+
+        Route::get('/add/roles/permission', 'AddRolesPermission')->name('add.roles.permission');
+        Route::post('/roles/permission/store', 'RolePermissionStore')->name('role.permission.store');
+        Route::get('/all/roles/permissions', 'AllRolePermission')->name('all.roles.permission');
+        Route::get('/edit/roles/permission/{id}', 'AdminEditRolePermission')->name('edit.rolepermission');
+        Route::post('/edit/roles/permission/{id}', 'AdminUpdateRolePermission')->name('update.rolepermission');
     });
 
 

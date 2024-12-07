@@ -6,11 +6,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use DB;
+use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
-    use HasFactory, Notifiable;
+    use HasFactory, Notifiable, HasRoles;
 
     /**
      * The attributes that are mass assignable.
@@ -52,4 +54,28 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    public static function getpermissionGroups()
+    {
+        $permission_groups = DB::table('permissions')->select('group_name')->groupBy('group_name')->get();
+
+        return $permission_groups;
+    }
+
+    public static function getPermissionByGroupName($group_name)
+    {
+        $permissions = DB::table('permissions')->select('name', 'id')->where('group_name', $group_name)->get();
+
+        return $permissions;
+    } // End Methods
+    public static function roleHasPermissions($role, $permissions)
+    {
+        $hasPermission = true;
+        foreach ($permissions as $permission) {
+            if (!$role->hasPermissionTo($permission->name)) {
+                $hasPermission = false;
+            }
+            return $hasPermission;
+        }
+    } // End Methods
 }
