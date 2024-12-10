@@ -50,7 +50,7 @@
                                 </td>
                                 <td>
                                     <a href="{{route('edit.rolepermission', $item->id)}}" class="btn btn-info">Edit</a>
-                                    <a href="{{route('delete.role', $item->id)}}" class="btn btn-danger"
+                                    <a href="{{route('delete.rolepermission', $item->id)}}" class="btn btn-danger"
                                         id="delete">Delete</a>
                                 </td>
                             </tr>

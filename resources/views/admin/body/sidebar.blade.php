@@ -134,6 +134,17 @@
 
             </ul>
         </li>
+        <li>
+            <a href="javascript:;" class="has-arrow">
+                <div class="parent-icon"><i class='bx bx-bookmark-heart'></i>
+                </div>
+                <div class="menu-title">Manager Admin</div>
+            </a>
+            <ul>
+                <li> <a href="{{route('all.admins')}}"><i class='bx bx-radio-circle'></i>All Admins</a>
+                </li>
+            </ul>
+        </li>
 
 
 

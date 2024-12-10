@@ -8,6 +8,11 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\RedirectResponse;
 use App\Models\Course;
+
+use Spatie\Permission\Models\Permission;
+use Spatie\Permission\Models\Role;
+
+
 class adminController extends Controller
 {
     public function AdminDashboard()
@@ -188,6 +193,20 @@ class adminController extends Controller
 
         $course = Course::where('id', $id)->first();
         return view('admin.backend.course.course_details', compact('course'));
+    }
+
+    // Admin All Methods /////////////////////////////////////////////////////////////////////
+    public function AllAdmin()
+    {
+
+        $admin = User::where('role', 'admin')->get();
+        return view('admin.backend.admin.all_admin', compact('admin'));
+    }
+    public function AddAdmin()
+    {
+        $role = Role::all();
+
+        return view('admin.backend.admin.addAdmin', compact('role'));
     }
 
 }
