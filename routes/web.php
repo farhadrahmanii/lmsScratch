@@ -221,6 +221,7 @@ Route::middleware(['auth', 'verified', 'instructor'])->group(function () {
     Route::controller(OrderController::class)->group(function () {
         Route::get('/instructor/pending/orders', 'InstructorPendingOrders')->name('instructor.pending.order');
         Route::get('/instructor/order/details/{payment}', 'InstructorOrderDetails')->name('instructor.order.detail');
+        Route::get('/instructor/order/pdf/{payment}', 'InstructorOrderInvoice')->name('instructor.order.invoice');
     });
 
 }); // End of Instructor Dashboard

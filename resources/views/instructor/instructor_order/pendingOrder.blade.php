@@ -54,14 +54,16 @@
                                                                         <a href="" class="btn btn-outline-success position-relative me-lg-5"> <i
                                                                                 class="bx bx-bell align-middle"></i> {{$item->payment->status}} {!! $item->payment->created_at->isToday() || $item->created_at->isYesterday()
                                                     ? '<span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-success">New</span>'
-                                                    : '' !!}
-                                                                        </a>
+                                                    : '' !!}</a>
                                                 @endif
                                             </td>
                                             <td>
                                                 <a href="{{ route('instructor.order.detail', $item->payment->id)}}"
                                                     class="btn btn-info"><i class="lni lni-eye"></i></a>
-                                                <a href="#" class="btn btn-danger"><i class="lni lni-download"></i></a>
+
+
+                                                <a href="{{ route('instructor.order.invoice', $item->payment->id) }}"
+                                                    class="btn btn-danger"><i class="lni lni-download"></i></a>
                                             </td>
                                         </tr>
                         @endforeach
