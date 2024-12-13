@@ -207,6 +207,34 @@ class adminController extends Controller
         $role = Role::all();
 
         return view('admin.backend.admin.addAdmin', compact('role'));
-    }
+    } //End of Method
+
+    public function StoreAdmin(Request $request)
+    {
+        $user = new User();
+        $user->username = $request->username;
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->phone = $request->phone;
+        $user->address = $request->address;
+        $user->password = Hash::make($request->password);
+        $user->role = 'admin';
+        $user->status = '1';
+        $user->save();
+
+
+        if ($request->role) {
+            // Fetch role name by ID if $request->role contains an ID
+            $role = Role::findById($request->role)->name ?? null;
+            if ($role) {
+                $user->assignRole($role);
+            }
+        }
+        $notification = array(
+            'message' => 'New Admin Inserted Successfully',
+            'alert-type' => 'success'
+        );
+        return redirect()->route('all.admins')->with($notification);
+    } // End of Method
 
 }

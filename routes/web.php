@@ -149,6 +149,7 @@ Route::middleware(['auth', 'verified', 'admin'])->group(function () {
     Route::controller(adminController::class)->group(function () {
         Route::get('/all/admin', 'AllAdmin')->name('all.admins');
         Route::get('/add/admin', 'AddAdmin')->name('add.admin');
+        Route::post('/store/admin', 'StoreAdmin')->name('store.admin');
     });
 
 

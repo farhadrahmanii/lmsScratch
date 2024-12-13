@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Payment;
+use DB;
 use Illuminate\Http\Request;
 use App\Models\Order;
 use illuminate\Support\Facades\Auth;
@@ -39,10 +40,16 @@ class OrderController extends Controller
         return view('admin.backend.order.confirmOrder', compact('payment'));
 
     } //End of Mehtod
+
+    // Instructor All Orders Methods here 
     public function InstructorPendingOrders()
     {
         $user = Auth::user()->id;
-        $orders = Order::where('instructor_id', $user)->orderBy('id', 'DESC')->get();
+        $orders = Order::where('instructor_id', $user)->select('payment_id', DB::raw('MAX(id) as max_id'))->groupBy('payment_id');
+
+        $orders = Order::joinSub($orders, 'latest_order', function ($join) {
+            $join->on('orders.id', '=', 'latest_order.max_id');
+        })->orderBy('latest_order.max_id', 'DESC')->get();
 
         return view('instructor.instructor_order.pendingOrder', compact('orders'));
 

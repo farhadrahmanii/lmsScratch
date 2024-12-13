@@ -45,13 +45,17 @@
                                                     <img src="{{!empty($item->photo)
                             ? url('upload/admin_images/' . $item->photo)
                             : url('upload/default.png')
-                                                                                                                                                                                                 }}"
+                                                                                                                                                                                                                     }}"
                                                         alt="Admin" class="p-1 rounded-circle bg-primary" width="50">
                                                 </td>
                                                 <td>{{$item->name}}</td>
                                                 <td>{{$item->email}}</td>
                                                 <td>{{$item->phone}}</td>
-                                                <td>{{$item->role}}</td>
+
+                                                @foreach ($item->roles as $role)
+                                                    <td>{{$role->name}}</td>
+                                                @endforeach
+
                                                 <td>{{$item->group_name}}</td>
                                                 <td>
                                                     <a href="{{route('edit.permission', $item->id)}}" class="btn btn-info">Edit</a>

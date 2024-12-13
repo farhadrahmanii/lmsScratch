@@ -27,7 +27,7 @@
         <div class="p-4 card-body">
             <h5 class="mb-4">Admin Registeration</h5>
             <form class="row g-3" method="POST" id="myForm" enctype="multipart/form-data"
-                action="{{route('store.permission')}}">
+                action="{{route('store.admin')}}">
                 @csrf
                 <div class="form-group col-md-6">
                     <label for="name" class="form-label">Name</label>
@@ -45,11 +45,11 @@
                 <div class="form-group col-md-6">
                     <label for="username" class="form-label">Username</label>
                     <input type="text" id="input1" name="username" class="form-control rounded-lg
-                    @error('nameusername')
+                    @error('username')
                         in-valid
                     @enderror
-                    " id="nameusername" placeholder="Data Science" required>
-                    @error('nameusername')
+                    " id="username" placeholder="Data Science" required>
+                    @error('username')
                         <span class="text-red-500 text-bold">{{$message}}</span>
                     @enderror
                 </div>
@@ -57,7 +57,7 @@
 
                 <div class="form-group col-md-6">
                     <label for="email" class="form-label">Email</label>
-                    <input type="text" id="input1" name="email" class="form-control rounded-lg
+                    <input type="email" id="input1" name="email" class="form-control rounded-lg
                     @error('email')
                         in-valid
                     @enderror
@@ -67,19 +67,31 @@
                     @enderror
                 </div>
 
-
                 <div class="form-group col-md-6">
-                    <label for="photo" class="form-label">photo</label>
-                    <input type="file" id="input1" name="photo" class="form-control rounded-lg
-                    @error('photo')
+                    <label for="phone" class="form-label">Phone</label>
+                    <input type="text" id="input1" name="phone" class="form-control rounded-lg
+                    @error('phone')
                         in-valid
                     @enderror
-                    " id="photo" placeholder="Data Science" required>
-                    @error('photo')
+                    " id="phone" placeholder="Data Science" required>
+                    @error('phone')
                         <span class="text-red-500 text-bold">{{$message}}</span>
                     @enderror
                 </div>
 
+
+
+                <div class="form-group col-md-6">
+                    <label for="password" class="form-label">password</label>
+                    <input type="text" id="input1" name="password" class="form-control rounded-lg
+                    @error('password')
+                        in-valid
+                    @enderror
+                    " id="password" placeholder="Data Science" required>
+                    @error('password')
+                        <span class="text-red-500 text-bold">{{$message}}</span>
+                    @enderror
+                </div>
 
                 <div class="form-group col-md-6">
                     <label for="address" class="form-label">address</label>
@@ -94,21 +106,27 @@
                 </div>
 
                 <div class="form-group col-md-6">
-                    <label for="status" class="form-label">status</label>
-                    <input type="text" id="input1" name="status" class="form-control rounded-lg
-                    @error('status')
-                        in-valid
+                    <label for="role" class="form-label">role</label>
+                    <select id="input1" name="role" class="form-control rounded-lg
+                    @error('role')
+                        is-invalid
                     @enderror
-                    " id="status" placeholder="Data Science" required>
-                    @error('status')
+                    " id="role" required>
+                        <option selected disabled>Select Role </option>
+                        @foreach ($role as $item)
+                            <option value="{{$item->id}}">{{$item->name}}</option>
+                        @endforeach
+                    </select>
+                    @error('role')
                         <span class="text-red-500 text-bold">{{$message}}</span>
                     @enderror
                 </div>
 
+
                 <div class="col-md-12">
                     <div class="gap-3 d-md-flex d-grid align-items-center">
                         <button type="submit" class="px-4 btn btn-primary">Submit</button>
-                        <a href="{{route('all.subcategory')}}" class="px-4 btn btn-light">Cancel</a>
+                        <a href="{{route('all.admins')}}" class="px-4 btn btn-light">Cancel</a>
                     </div>
                 </div>
             </form>

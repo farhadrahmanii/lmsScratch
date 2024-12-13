@@ -23,15 +23,15 @@ class User extends Authenticatable
 
     // Helper method to check role
 
-    // Define available roles
-    const ADMIN = 'admin';
-    const INSTRUCTOR = 'instructor';
-    const USER = 'user';
+    // // Define available roles
+    // const ADMIN = 'admin';
+    // const INSTRUCTOR = 'instructor';
+    // const USER = 'user';
 
-    public function hasRole($role)
-    {
-        return $this->role === $role;
-    }
+    // public function hasRole($role)
+    // {
+    //     return $this->role === $role;
+    // }
     /**
      * The attributes that should be hidden for serialization.
      *
