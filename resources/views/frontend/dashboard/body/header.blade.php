@@ -11,7 +11,7 @@
                     <div class="col-lg-12">
                         <div class="logo-box logo--box">
                             <a href="index.html" class="logo"><img src="{{asset('frontend/images/logo.png')}}"
-                                    alt="logo"></a>
+                                    width="100px" alt="logo"></a>
                             <div class="user-btn-action">
                                 <div class="mr-2 shadow-sm search-menu-toggle icon-element icon-element-sm"
                                     data-toggle="tooltip" data-placement="top" title="Search">

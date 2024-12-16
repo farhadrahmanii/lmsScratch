@@ -6,7 +6,7 @@ use App\Models\Payment;
 use DB;
 use Illuminate\Http\Request;
 use App\Models\Order;
-use illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Auth;
 use Barryvdh\DomPDF\Facade\Pdf;
 class OrderController extends Controller
 {
@@ -72,6 +72,23 @@ class OrderController extends Controller
             'chroot' => public_path()
         ]);
         return $pdf->download('invoice.pdf');
+    } //End of Mehtod
+
+
+
+
+    // my Course Methods
+    public function MyCourse()
+    {
+
+        $user = Auth::user()->id;
+        $orders = Order::where('user_id', $user)->select('course_id', DB::raw('MAX(id) as max_id'))->groupBy('course_id');
+
+        $mycourse = Order::joinSub($orders, 'latest_order', function ($join) {
+            $join->on('orders.id', '=', 'latest_order.max_id');
+        })->orderBy('latest_order.max_id', 'DESC')->get();
+
+        return view('frontend.myCourses.my_all_courses', compact('mycourse'));
     } //End of Mehtod
 
 

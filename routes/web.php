@@ -37,6 +37,11 @@ Route::middleware('auth')->group(function () {
         Route::get('/get-wishlist-course', 'GetWishlist');
         Route::get('/wishlist-remove/{id}', 'RemoveWishlist');
     });
+
+    // User My Course all Routes
+    Route::controller(OrderController::class)->group(function () {
+        Route::get('/user/my-course', 'MyCourse')->name('my.course');
+    });
 });
 
 require __DIR__ . '/auth.php';
@@ -232,6 +237,7 @@ Route::get('/instructor/login', [instructorController::class, 'InstructorLogin']
 
 // user or Student Dashboard
 Route::middleware(['auth', 'verified', 'user'])->group(function () {
+
 
 });
 
