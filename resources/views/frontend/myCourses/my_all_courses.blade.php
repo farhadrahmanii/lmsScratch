@@ -12,7 +12,7 @@
 
             <div class="card card-item card-item-list-layout">
                 <div class="card-image">
-                    <a href="course-details.html" class="d-block">
+                    <a href="{{ route('course.view', $course->course_id) }}" class="d-block">
                         <img class="card-img-top" src="{{asset($course->course->course_image)}}"
                             alt="{{$course->course_name}}">
                     </a>
@@ -23,7 +23,8 @@
                 </div><!-- end card-image -->
                 <div class="card-body">
                     <h6 class="ribbon ribbon-blue-bg fs-14 mb-3">{{$course->course->label}}</h6>
-                    <h5 class="card-title"><a href="course-details.html">{{$course->course->course_name}}</a>
+                    <h5 class="card-title"><a
+                            href="{{ route('course.view', $course->course_id) }}">{{$course->course->course_name}}</a>
                     </h5>
                     <p class="card-text"><a href="teacher-detail.html">{{$course->instructor->name}}</a></p>
                     <div class="rating-wrap d-flex align-items-center py-2">

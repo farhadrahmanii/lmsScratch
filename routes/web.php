@@ -41,6 +41,7 @@ Route::middleware('auth')->group(function () {
     // User My Course all Routes
     Route::controller(OrderController::class)->group(function () {
         Route::get('/user/my-course', 'MyCourse')->name('my.course');
+        Route::get('/course/view/{course_id}', 'CourseView')->name('course.view');
     });
 });
 

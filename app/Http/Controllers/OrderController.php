@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\CourseSection;
 use App\Models\Payment;
 use DB;
 use Illuminate\Http\Request;
@@ -89,6 +90,16 @@ class OrderController extends Controller
         })->orderBy('latest_order.max_id', 'DESC')->get();
 
         return view('frontend.myCourses.my_all_courses', compact('mycourse'));
+    } //End of Mehtod
+
+    public function CourseView($course_id)
+    {
+        $user = Auth::user()->id;
+        $course = Order::where('user_id', $user)->where('course_id', $course_id)->first();
+        $section = CourseSection::where('course_id', $course_id)->orderBy('id', 'asc')->get();
+        // dd($section);
+
+        return view('frontend.myCourses.course_view', compact('course', 'section'));
     } //End of Mehtod
 
 
