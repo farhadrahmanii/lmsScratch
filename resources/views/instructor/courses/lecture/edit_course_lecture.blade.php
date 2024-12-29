@@ -48,7 +48,7 @@
                     @error('name')
                         in-valid
                     @enderror
-                    " id="name" placeholder="Data Science" required>
+                    " id="name" placeholder="Data Science">
                     @error('name')
                         <span class="text-red-500 text-bold">{{$message}}</span>
                     @enderror

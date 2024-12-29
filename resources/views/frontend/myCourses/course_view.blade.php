@@ -1,5 +1,7 @@
 @include('frontend.myCourses.body.header')
 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
 <body>
     <!-- start cssload-loader -->
     <div class="preloader">
@@ -106,71 +108,15 @@
                 <div class="course-dashboard-column">
                     <div class="lecture-viewer-container">
                         <div class="lecture-video-item">
-                            <video controls crossorigin playsinline id="player">
-                                <!-- Video files -->
-                                <source src="https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-576p.mp4"
-                                    type="video/mp4" />
-                                <source src="https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-720p.mp4"
-                                    type="video/mp4" />
-                                <source src="https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-1080p.mp4"
-                                    type="video/mp4" />
-
-                                <!-- Caption files -->
-                                <track kind="captions" label="English" srclang="en"
-                                    src="https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-HD.en.vtt"
-                                    default />
-                                <track kind="captions" label="Français" srclang="fr"
-                                    src="https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-HD.fr.vtt" />
-
-                                <!-- Fallback for browsers that don't support the <video> element -->
-                                <a href="https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-576p.mp4"
-                                    download>Download</a>
-                            </video>
-                        </div>
-                        <div class="lecture-viewer-text-wrap">
-                            <div class="lecture-viewer-text-content custom-scrollbar-styled">
-                                <div class="lecture-viewer-text-body">
-                                    <h2 class="fs-24 font-weight-semi-bold pb-4">Download your Footage for your Quick
-                                        Start</h2>
-                                    <div class="lecture-viewer-content-detail">
-                                        <ul class="generic-list-item pb-4">
-                                            <li>Hi</li>
-                                            <li>Welcome to Motion Graphics in After Effects. </li>
-                                            <li>In the next lectures you will start creating your first animation and
-                                                animate imported footage.</li>
-                                            <li>But I must explain to you how all this mistaken idea of denouncing
-                                                pleasure and praising pain was born and I will give you a complete
-                                                account of the system, and expound the actual teachings of the great
-                                                explorer of the truth, the master-builder of human happiness. No one
-                                                rejects, dislikes,</li>
-                                            <li>At vero eos et accusamus et iusto odio dignissimos ducimus qui
-                                                blanditiis praesentium voluptatum deleniti atque corrupti quos dolores
-                                                et quas molestias excepturi sint occaecati cupiditate non provident,
-                                                similique sunt in culpa qui officia deserunt mollitia animi, id est
-                                                laborum et dolorum fuga. </li>
-                                            <li>Occaecati cupiditate non provident, similique sunt in culpa qui officia
-                                                deserunt mollitia animi, id est laborum et dolorum fuga. </li>
-                                            <li>Et harum quidem rerum facilis est et expedita distinctio. Nam libero
-                                                tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo
-                                                minus id quod maxime placeat facere possimus,</li>
-                                            <li>On the other hand, we denounce with righteous indignation and dislike
-                                                men who are so beguiled and demoralized by the charms of pleasure of the
-                                                moment, so blinded by desire, that they cannot foresee the pain and
-                                                trouble that are bound to ensue; and equal blame belongs to those who
-                                                fail in their duty through weakness of will, which is the same as saying
-                                                through shrinking from toil and pain. These cases are perfectly simple
-                                                and easy to distinguish. </li>
-                                            <li><strong class="font-weight-semi-bold">Download your footage Now, Click
-                                                    on the Link Below.</strong></li>
-                                        </ul>
-                                        <div class="btn-box">
-                                            <h3 class="fs-18 font-weight-semi-bold pb-3">Resources for this lecture</h3>
-                                            <a href="#" class="btn theme-btn theme-btn-transparent"><i
-                                                    class="la la-file-zip-o mr-1"></i>Quick-start.zip</a>
-                                        </div>
-                                    </div>
-                                </div>
+                            <iframe width="100%" height="500" id="videoContainer" src=""
+                                title="The Best Way to Learn With Videos and Online Classes I Video Notebook"
+                                frameborder="0"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                allowfullscreen></iframe>
+                            <div id="textLesson" class="fs-24 font-weight-semi-bold pb-2 text-center mt-4">
+                                <h3></h3>
                             </div>
+
                         </div>
                     </div><!-- end lecture-viewer-container -->
                     <div class="lecture-video-detail">
@@ -603,91 +549,7 @@
                                             </div><!-- end replay-question-body -->
                                         </div><!-- end replay-question-wrap -->
                                         <div class="question-overview-result-wrap">
-                                            <div class="lecture-overview-item">
-                                                <form method="post">
-                                                    <div class="input-group mb-3">
-                                                        <input
-                                                            class="form-control form--control form--control-gray pl-3"
-                                                            type="text" name="search"
-                                                            placeholder="Search all course questions">
-                                                        <div class="input-group-append">
-                                                            <button class="btn theme-btn"><i
-                                                                    class="la la-search search-icon"></i></button>
-                                                        </div>
-                                                    </div>
-                                                </form>
-                                                <div class="question-overview-filter-wrap d-flex align-items-center">
-                                                    <div class="question-overview-filter-item">
-                                                        <div class="select-container w-100">
-                                                            <select class="select-container-select">
-                                                                <option value="0">All lectures</option>
-                                                                <option value="1">Current lecture</option>
-                                                            </select>
-                                                        </div>
-                                                    </div><!-- end question-overview-filter-item -->
-                                                    <div class="question-overview-filter-item">
-                                                        <div class="select-container w-100">
-                                                            <select class="select-container-select">
-                                                                <option value="0">Sort by most recent</option>
-                                                                <option value="1">Sort by most upvoted</option>
-                                                                <option value="2">Sort by recommended</option>
-                                                            </select>
-                                                        </div>
-                                                    </div><!-- end question-overview-filter-item -->
-                                                    <div class="question-overview-filter-item">
-                                                        <div class="generic-action-wrap">
-                                                            <div class="dropdown">
-                                                                <a class="btn theme-btn theme-btn-transparent w-100"
-                                                                    href="#" data-toggle="dropdown" aria-haspopup="true"
-                                                                    aria-expanded="false">
-                                                                    Filter questions
-                                                                </a>
-                                                                <div class="dropdown-menu">
-                                                                    <div class="dropdown-item">
-                                                                        <div
-                                                                            class="custom-control custom-checkbox fs-15">
-                                                                            <input type="checkbox"
-                                                                                class="custom-control-input"
-                                                                                id="questionsCheckbox" required>
-                                                                            <label
-                                                                                class="custom-control-label custom--control-label"
-                                                                                for="questionsCheckbox">
-                                                                                Questions I'm following
-                                                                            </label>
-                                                                        </div><!-- end custom-control -->
-                                                                    </div>
-                                                                    <div class="dropdown-item">
-                                                                        <div
-                                                                            class="custom-control custom-checkbox fs-15">
-                                                                            <input type="checkbox"
-                                                                                class="custom-control-input"
-                                                                                id="questionsCheckbox2" required>
-                                                                            <label
-                                                                                class="custom-control-label custom--control-label"
-                                                                                for="questionsCheckbox2">
-                                                                                Questions I asked
-                                                                            </label>
-                                                                        </div><!-- end custom-control -->
-                                                                    </div>
-                                                                    <div class="dropdown-item">
-                                                                        <div
-                                                                            class="custom-control custom-checkbox fs-15">
-                                                                            <input type="checkbox"
-                                                                                class="custom-control-input"
-                                                                                id="questionsCheckbox3" required>
-                                                                            <label
-                                                                                class="custom-control-label custom--control-label"
-                                                                                for="questionsCheckbox3">
-                                                                                Questions without responses
-                                                                            </label>
-                                                                        </div><!-- end custom-control -->
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div><!-- end generic-action-wrap -->
-                                                    </div><!-- end question-overview-filter-item -->
-                                                </div>
-                                            </div><!-- end lecture-overview-item -->
+
                                             <div class="lecture-overview-item">
                                                 <div
                                                     class="question-overview-result-header d-flex align-items-center justify-content-between">
@@ -735,184 +597,6 @@
                                                                     <div
                                                                         class="number-upvotes question-response d-flex align-items-center">
                                                                         <span>1</span>
-                                                                        <button type="button"
-                                                                            class="question-replay-btn"><i
-                                                                                class="la la-comments"></i></button>
-                                                                    </div>
-                                                                </div><!-- end question-upvote-action -->
-                                                            </div>
-                                                            <p class="meta-tags pt-1 fs-13">
-                                                                <a href="#">Alex Smith</a>
-                                                                <a href="#">Lecture 20</a>
-                                                                <span>3 hours ago</span>
-                                                            </p>
-                                                        </div><!-- end media-body -->
-                                                    </div><!-- end media -->
-                                                    <div
-                                                        class="media media-card border-bottom border-bottom-gray py-4 px-3">
-                                                        <div class="media-img rounded-full flex-shrink-0 avatar-sm">
-                                                            <img class="rounded-full" src="images/small-avatar-2.jpg"
-                                                                alt="User image">
-                                                        </div>
-                                                        <div class="media-body">
-                                                            <div
-                                                                class="d-flex align-items-center justify-content-between">
-                                                                <div class="question-meta-content">
-                                                                    <a href="javascript:void(0)" class="d-block">
-                                                                        <h5 class="fs-16 pb-1">When i selected rectangle
-                                                                            and placed it its create mask ? I cant solve
-                                                                            this</h5>
-                                                                        <p class="text-truncate fs-15 text-gray">
-                                                                            Lorem ipsum dolor sit amet, consectetur
-                                                                            adipisicing elit,
-                                                                            sed do eiusmod tempor incididunt ut labore
-                                                                            et dolore magna aliqua.
-                                                                            Ut enim ad minim veniam, quis nostrud
-                                                                            exercitation.
-                                                                        </p>
-                                                                    </a>
-                                                                </div><!-- end question-meta-content -->
-                                                                <div class="question-upvote-action">
-                                                                    <div
-                                                                        class="number-upvotes pb-2 d-flex align-items-center">
-                                                                        <span>0</span>
-                                                                        <button type="button"><i
-                                                                                class="la la-arrow-up"></i></button>
-                                                                    </div>
-                                                                    <div
-                                                                        class="number-upvotes question-response d-flex align-items-center">
-                                                                        <span>0</span>
-                                                                        <button type="button"
-                                                                            class="question-replay-btn"><i
-                                                                                class="la la-comments"></i></button>
-                                                                    </div>
-                                                                </div><!-- end question-upvote-action -->
-                                                            </div>
-                                                            <p class="meta-tags pt-1 fs-13">
-                                                                <a href="#">Alex Smith</a>
-                                                                <a href="#">Lecture 20</a>
-                                                                <span>3 hours ago</span>
-                                                            </p>
-                                                        </div><!-- end media-body -->
-                                                    </div><!-- end media -->
-                                                    <div
-                                                        class="media media-card border-bottom border-bottom-gray py-4 px-3">
-                                                        <div class="media-img rounded-full flex-shrink-0 avatar-sm">
-                                                            <img class="rounded-full" src="images/small-avatar-3.jpg"
-                                                                alt="User image">
-                                                        </div>
-                                                        <div class="media-body">
-                                                            <div
-                                                                class="d-flex align-items-center justify-content-between">
-                                                                <div class="question-meta-content">
-                                                                    <a href="javascript:void(0)" class="d-block">
-                                                                        <h5 class="fs-16 pb-1">Practice Activity</h5>
-                                                                        <p class="text-truncate fs-15 text-gray">
-                                                                            https://youtu.be/fzyAWYKh2pgg
-                                                                        </p>
-                                                                    </a>
-                                                                </div><!-- end question-meta-content -->
-                                                                <div class="question-upvote-action">
-                                                                    <div
-                                                                        class="number-upvotes pb-2 d-flex align-items-center">
-                                                                        <span>0</span>
-                                                                        <button type="button"><i
-                                                                                class="la la-arrow-up"></i></button>
-                                                                    </div>
-                                                                    <div
-                                                                        class="number-upvotes question-response d-flex align-items-center">
-                                                                        <span>0</span>
-                                                                        <button type="button"
-                                                                            class="question-replay-btn"><i
-                                                                                class="la la-comments"></i></button>
-                                                                    </div>
-                                                                </div><!-- end question-upvote-action -->
-                                                            </div>
-                                                            <p class="meta-tags pt-1 fs-13">
-                                                                <a href="#">Alex Smith</a>
-                                                                <a href="#">Lecture 20</a>
-                                                                <span>3 hours ago</span>
-                                                            </p>
-                                                        </div><!-- end media-body -->
-                                                    </div><!-- end media -->
-                                                    <div
-                                                        class="media media-card border-bottom border-bottom-gray py-4 px-3">
-                                                        <div class="media-img rounded-full flex-shrink-0 avatar-sm">
-                                                            <img class="rounded-full" src="images/small-avatar-4.jpg"
-                                                                alt="User image">
-                                                        </div>
-                                                        <div class="media-body">
-                                                            <div
-                                                                class="d-flex align-items-center justify-content-between">
-                                                                <div class="question-meta-content">
-                                                                    <a href="javascript:void(0)" class="d-block">
-                                                                        <h5 class="fs-16 pb-1">The walking man
-                                                                            composition.</h5>
-                                                                        <p class="text-truncate fs-15 text-gray">
-                                                                            Lorem ipsum dolor sit amet, consectetur
-                                                                            adipisicing elit,
-                                                                            sed do eiusmod tempor incididunt ut labore
-                                                                            et dolore magna aliqua.
-                                                                            Ut enim ad minim veniam, quis nostrud
-                                                                            exercitation.
-                                                                        </p>
-                                                                    </a>
-                                                                </div><!-- end question-meta-content -->
-                                                                <div class="question-upvote-action">
-                                                                    <div
-                                                                        class="number-upvotes pb-2 d-flex align-items-center">
-                                                                        <span>0</span>
-                                                                        <button type="button"><i
-                                                                                class="la la-arrow-up"></i></button>
-                                                                    </div>
-                                                                    <div
-                                                                        class="number-upvotes question-response d-flex align-items-center">
-                                                                        <span>0</span>
-                                                                        <button type="button"
-                                                                            class="question-replay-btn"><i
-                                                                                class="la la-comments"></i></button>
-                                                                    </div>
-                                                                </div><!-- end question-upvote-action -->
-                                                            </div>
-                                                            <p class="meta-tags pt-1 fs-13">
-                                                                <a href="#">Alex Smith</a>
-                                                                <a href="#">Lecture 20</a>
-                                                                <span>3 hours ago</span>
-                                                            </p>
-                                                        </div><!-- end media-body -->
-                                                    </div><!-- end media -->
-                                                    <div
-                                                        class="media media-card border-bottom border-bottom-gray py-4 px-3">
-                                                        <div class="media-img rounded-full flex-shrink-0 avatar-sm">
-                                                            <img class="rounded-full" src="images/small-avatar-5.jpg"
-                                                                alt="User image">
-                                                        </div>
-                                                        <div class="media-body">
-                                                            <div
-                                                                class="d-flex align-items-center justify-content-between">
-                                                                <div class="question-meta-content">
-                                                                    <a href="javascript:void(0)" class="d-block">
-                                                                        <h5 class="fs-16 pb-1">Record options</h5>
-                                                                        <p class="text-truncate fs-15 text-gray">
-                                                                            Lorem ipsum dolor sit amet, consectetur
-                                                                            adipisicing elit,
-                                                                            sed do eiusmod tempor incididunt ut labore
-                                                                            et dolore magna aliqua.
-                                                                            Ut enim ad minim veniam, quis nostrud
-                                                                            exercitation.
-                                                                        </p>
-                                                                    </a>
-                                                                </div><!-- end question-meta-content -->
-                                                                <div class="question-upvote-action">
-                                                                    <div
-                                                                        class="number-upvotes pb-2 d-flex align-items-center">
-                                                                        <span>0</span>
-                                                                        <button type="button"><i
-                                                                                class="la la-arrow-up"></i></button>
-                                                                    </div>
-                                                                    <div
-                                                                        class="number-upvotes question-response d-flex align-items-center">
-                                                                        <span>0</span>
                                                                         <button type="button"
                                                                             class="question-replay-btn"><i
                                                                                 class="la la-comments"></i></button>
@@ -1203,7 +887,6 @@
                                                                         <div class="card-body p-0">
                                                                             <ul class="curriculum-sidebar-list">
                                                                                 @foreach ($lecture as $lect)
-
                                                                                     <li class="course-item-link active">
                                                                                         <div class="course-item-content-wrap">
                                                                                             <div class="custom-control custom-checkbox">
@@ -1213,7 +896,11 @@
                                                                                                     for="courseCheckbox{{$lect->id}}"></label>
                                                                                             </div><!-- end custom-control -->
                                                                                             <div class="course-item-content">
-                                                                                                <h4 class="fs-15">{{$lect->lecture_title}}</h4>
+                                                                                                <h4 class="fs-15 lecture-title"
+                                                                                                    data-video-url="{{ $lect->url }}"
+                                                                                                    data-content="{{ $lect->content }}">
+                                                                                                    {{$lect->lecture_title}}
+                                                                                                </h4>
                                                                                             </div><!-- end course-item-content -->
                                                                                         </div><!-- end course-item-content-wrap -->
                                                                                     </li>
@@ -1436,6 +1123,73 @@
         </div><!-- end modal-dialog -->
     </div><!-- end modal -->
     <!-- template js files -->
+
+
+
+
+    <script type="text/javascript">
+        // Function to open the first lecture when the page loads
+        function openFirstLecture() {
+            const firstLecture = document.querySelector('.lecture-title'); // Get the first lecture element
+            if (firstLecture) {
+                firstLecture.click(); // Trigger the click event on the first lecture
+            }
+        }
+
+        // Function to handle lecture clicks and load content
+        function viewLesson(videoUrl, vimeoUrl, textContent) {
+            const video = document.getElementById("videoContainer");
+            const text = document.getElementById("textLesson");
+            const textContainer = document.createElement("div");
+
+            if (videoUrl && videoUrl.trim() !== "") {
+                video.classList.remove("d-none");
+                text.classList.add("d-none");
+                text.innerHTML = "";
+                video.setAttribute("src", videoUrl);
+            } else if (vimeoUrl && vimeoUrl.trim() !== "") {
+                video.classList.remove("d-none");
+                text.classList.add("d-none");
+                text.innerHTML = "";
+                video.setAttribute("src", vimeoUrl);
+            } else if (textContent && textContent.trim() !== "") {
+                video.classList.add("d-none");
+                text.classList.remove("d-none");
+                text.innerHTML = "";
+                textContainer.innerText = textContent;
+                textContainer.style.fontSize = "14px";
+                textContainer.style.textAlign = "left";
+                textContainer.style.paddingLeft = "40px";
+                textContainer.style.paddingRight = "40px";
+                text.appendChild(textContainer);
+            }
+        }
+
+        // Add a click event listener to all lecture elements
+        document.querySelectorAll('.lecture-title').forEach((lectureTitle) => {
+            lectureTitle.addEventListener('click', () => {
+                const videoUrl = lectureTitle.getAttribute('data-video-url');
+                const vimeoUrl = lectureTitle.getAttribute('data-vimeo-url');
+                const textContent = lectureTitle.getAttribute('data-content');
+                viewLesson(videoUrl, vimeoUrl, textContent);
+            });
+        });
+
+        // Open the first lecture when the page loads
+        window.addEventListener('load', () => {
+            openFirstLecture();
+        });
+    </script>
+
+
+
+
+
+
+
+
+
+
     @include('frontend.myCourses.body.footer')
 </body>
 
