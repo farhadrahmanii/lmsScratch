@@ -193,5 +193,10 @@ class RoleController extends Controller
 
         return redirect()->route('all.roles.permission')->with($notification);
     }    // End of method
+    public function ImportPermissions()
+    {
+
+        return view('admin.backend.pages.permission.importPermissions');
+    }    // End of method
 
 }

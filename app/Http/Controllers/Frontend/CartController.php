@@ -9,13 +9,15 @@ use App\Models\Coupon;
 use App\Models\Course;
 use App\Models\Order;
 use App\Models\Payment;
+use App\Models\User;
 use Auth;
 use Carbon\Carbon;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Facades\Session;
-
+use App\Notifications\OrderComplete;
 class CartController extends Controller
 {
     public function addToCart(Request $request, $id)
@@ -197,6 +199,9 @@ class CartController extends Controller
     }    // End of Method
     public function Payment(Request $request)
     {
+        $user = User::where('role', 'instructor')->get();
+
+        
         if (Session::has('coupon')) {
             $total_amount = session()->get('coupon')['total_amount'];
         } else {
@@ -257,6 +262,8 @@ class CartController extends Controller
         ];
         Mail::to($request->email)->send(new Orderconfirm($data));
 
+        // Send Notification
+        Notification::send($user, new OrderComplete($request->name));
         // 
         if ($request->cash_delivery == 'strip') {
             echo 'Stripe Payment';
