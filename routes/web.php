@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\adminController;
+use App\Http\Controllers\Backend\ActiveUserController;
 use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Backend\CouponController;
 use App\Http\Controllers\Backend\CourseController;
@@ -22,7 +23,7 @@ Route::get('/', [userController::class, 'home'])->name('home');
 
 
 
-Route::middleware('auth')->group(function () {
+Route::middleware(['auth'])->group(function () {
 
     Route::get('/dashboard', [userController::class, 'UserDashboard'])->name('dashboard');
     Route::get('/user/profile', [userController::class, 'UserProfile'])->name('user.profile');
@@ -121,6 +122,8 @@ Route::middleware(['auth', 'verified', 'admin'])->group(function () {
         Route::post('/update/permission', 'UpdatePermission')->name('update.permission');
         Route::get('/delete/permission/{id}', 'DeletePermission')->name('delete.permission');
         Route::get('/import/permissions', 'ImportPermissions')->name('import.permission');
+        Route::get('/export', 'export')->name('export');
+        Route::post('/import', 'import')->name('import');
 
     });
     // Role Controller 
@@ -157,6 +160,13 @@ Route::middleware(['auth', 'verified', 'admin'])->group(function () {
         Route::get('/all/admin', 'AllAdmin')->name('all.admins');
         Route::get('/add/admin', 'AddAdmin')->name('add.admin');
         Route::post('/store/admin', 'StoreAdmin')->name('store.admin');
+    });
+
+    // all Admin Orders Routes
+    Route::controller(ActiveUserController::class)->group(function () {
+        Route::get('/all/users', 'AllUser')->name('all.user');
+        Route::get('/all/instructor', 'AllInstructor')->name('all.instructor');
+
     });
 
 
@@ -238,7 +248,7 @@ Route::get('/instructor/login', [instructorController::class, 'InstructorLogin']
 
 
 // user or Student Dashboard
-Route::middleware(['auth', 'verified', 'user'])->group(function () {
+Route::middleware(['auth', 'user'])->group(function () {
 
 
 });

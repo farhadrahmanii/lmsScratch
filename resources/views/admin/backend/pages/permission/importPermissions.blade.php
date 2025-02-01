@@ -10,7 +10,7 @@
         <div class="ps-3">
             <nav aria-label="breadcrumb">
                 <ol class="p-0 mb-0 breadcrumb">
-                    <a href="{{route('all.permission')}}" class="px-5 btn btn-warning">Download Excel File</a>
+                    <a href="{{route('export')}}" class="px-5 btn btn-warning">Download Excel File</a>
                 </ol>
             </nav>
         </div>
@@ -24,8 +24,7 @@
     <div class="card">
         <div class="p-4 card-body">
             <h5 class="mb-4">Import Permissions</h5>
-            <form class="row g-3" method="POST" id="myForm" enctype="multipart/form-data"
-                action="{{route('store.permission')}}">
+            <form class="row g-3" method="POST" id="myForm" enctype="multipart/form-data" action="{{route('import')}}">
                 @csrf
                 <div class="form-group col-md-6">
                     <label for="import_file" class="form-label">Permission File</label>

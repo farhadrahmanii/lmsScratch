@@ -19,6 +19,7 @@
         <div class="ms-auto">
             <a href="{{route('add.permission')}}" class="px-5 btn btn-primary">Add Permissions</a>
             <a href="{{route('import.permission')}}" class="px-5 btn btn-danger">import</a>
+            <a href="{{route('export')}}" class="px-5 btn btn-info">export</a>
         </div>
     </div>
     <!--end breadcrumb-->

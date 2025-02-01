@@ -77,6 +77,20 @@
             <a href="javascript:;" class="has-arrow">
                 <div class="parent-icon"><i class='bx bx-bookmark-heart'></i>
                 </div>
+                <div class="menu-title">Active User</div>
+            </a>
+            <ul>
+                <li> <a href="{{route('all.user')}}"><i class='bx bx-radio-circle'></i>All Users</a>
+                </li>
+                <li> <a href="{{route('all.instructor')}}"><i class='bx bx-radio-circle'></i>All Instructor</a>
+                </li>
+            </ul>
+        </li>
+
+        <li>
+            <a href="javascript:;" class="has-arrow">
+                <div class="parent-icon"><i class='bx bx-bookmark-heart'></i>
+                </div>
                 <div class="menu-title">Manage Coupons</div>
             </a>
             <ul>

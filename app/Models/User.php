@@ -3,11 +3,13 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use DB;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use DB;
+use Illuminate\Support\Facades\Cache;
 use Spatie\Permission\Traits\HasRoles;
+use Carbon\Carbon;
 
 class User extends Authenticatable
 {
@@ -78,4 +80,10 @@ class User extends Authenticatable
             return $hasPermission;
         }
     } // End Methods
+
+    // User Active Now
+    public function UserOnline()
+    {
+        return Cache::has('user-is-online-' . $this->id);
+    }
 }
