@@ -13,11 +13,9 @@ use App\Http\Controllers\Frontend\WishListController;
 use App\Http\Controllers\instructorController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\userController;
+use App\Models\User;
 use Illuminate\Support\Facades\Route;
-
-
-
-
+use Illuminate\Http\Request;
 
 Route::get('/', [userController::class, 'home'])->name('home');
 
@@ -48,7 +46,21 @@ Route::middleware(['auth'])->group(function () {
 
 require __DIR__ . '/auth.php';
 
+Route::get('/check-email', function (Request $request) {
+    $email = $request->query("email");
 
+    if (!$email) {
+        return response()->json(['status' => 'error', 'message' => 'No email provided'], 400);
+    }
+
+    $user = User::where('email', $email)->first();
+
+    if ($user) {
+        return response()->json(['status' => 'failed', 'message' => 'Email already exists']);
+    } else {
+        return response()->json(['status' => 'success', 'message' => 'Email is available']);
+    }
+})->name("checkEmail");
 // Admin Dashboard
 Route::middleware(['auth', 'verified', 'admin'])->group(function () {
     Route::get('/admin/dashboard', [adminController::class, 'AdminDashboard'])->name('admin.dashboard');
